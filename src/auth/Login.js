@@ -1,19 +1,21 @@
-import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const LoginScreen = () => {
+const Login = () => {
     return (
-        <SafeAreaView style={{ flex: 1, flexDirection: "column", }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
             <StatusBar
                 animated={true}
                 backgroundColor={'#fff'}
                 barStyle="dark-content"
-                translucent={true}
             />
-            
+
+            <View>
+
+            </View>
+
         </SafeAreaView>
     );
 };
 
-export default LoginScreen;
+export default Login;
