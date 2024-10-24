@@ -4,9 +4,9 @@ import Login from './src/auth/Login';
 
 const App = () => {
   return (
-    <View>
+    <>
       <Login />
-    </View>
+    </>
   )
 }
 
