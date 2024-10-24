@@ -60,7 +60,7 @@ const Login = () => {
                                         <Text style={{ color: '#5f5f5f', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>Email</Text>
                                     </View>
 
-                                    <View style={{ alignSelf: "center", width: "88%", paddingHorizontal: 14, backgroundColor: "#f1f3f6", elevation: 8, borderRadius: 8, borderColor: isEmailFocused ? purple : "", borderWidth: isEmailFocused ? 1.5 : 0, marginVertical: 2 }}>
+                                    <View style={{ alignSelf: "center", width: "88%", paddingHorizontal: 14, backgroundColor: "#fff", elevation: 8, borderRadius: 8, borderColor: isEmailFocused ? purple : "", borderWidth: isEmailFocused ? 1.5 : 0, marginVertical: 4 }}>
                                         <TextInput
                                             style={{ height: 40, fontSize: responsiveFontSize(2.1), fontWeight: "500", color: "#000", }}
                                             onChangeText={setEmail}
@@ -81,7 +81,7 @@ const Login = () => {
                                         <Text style={{ color: '#5f5f5f', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>Password</Text>
                                     </View>
 
-                                    <View style={{ alignSelf: "center", width: "88%", paddingHorizontal: 15, backgroundColor: "#f1f3f6", elevation: 8, borderRadius: 8, borderColor: isPasswordFocused ? purple : "", borderWidth: isPasswordFocused ? 1.5 : 0, marginTop: 2 }}>
+                                    <View style={{ alignSelf: "center", width: "88%", paddingHorizontal: 15, backgroundColor: "#fff", elevation: 8, borderRadius: 8, borderColor: isPasswordFocused ? purple : "", borderWidth: isPasswordFocused ? 1.5 : 0, marginTop: 4 }}>
                                         <TextInput
                                             style={{ fontSize: responsiveFontSize(2.1), fontWeight: "500", color: "#000", height: 40 }}
                                             onChangeText={setPassword}
