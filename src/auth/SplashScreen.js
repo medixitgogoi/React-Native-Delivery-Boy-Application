@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const SplashScreen = () => {
+    
     const navigation = useNavigation();
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
