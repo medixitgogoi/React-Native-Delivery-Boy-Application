@@ -1,11 +1,10 @@
-import { View, Text } from 'react-native';
-import Home from './src/screens/Home'
-import Login from './src/auth/Login';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigation from './src/navigation/Stacknavigation';
 
 const App = () => {
   return (
     <>
-      <Login />
+      <StackNavigation />
     </>
   )
 }
