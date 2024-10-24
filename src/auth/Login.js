@@ -57,7 +57,7 @@ const Login = () => {
                                 <View>
                                     <View style={{ flexDirection: 'row', alignItems: 'center', width: "88%", alignSelf: 'center', borderRadius: 8, display: loading ? 'none' : "flex", gap: 5 }}>
                                         <Icon name="email-outline" size={23} color={'#363636'} />
-                                        <Text style={{ color: '#5f5f5f', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>Email</Text>
+                                        <Text style={{ color: '#000', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>Email</Text>
                                     </View>
 
                                     <View style={{ alignSelf: "center", width: "88%", paddingHorizontal: 14, backgroundColor: "#fff", elevation: 8, borderRadius: 8, borderColor: isEmailFocused ? purple : "", borderWidth: isEmailFocused ? 1.5 : 0, marginVertical: 4 }}>
@@ -78,7 +78,7 @@ const Login = () => {
                                 <View style={{ marginBottom: 20 }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center', width: "88%", alignSelf: 'center', borderRadius: 8, display: loading ? 'none' : "flex", gap: 3 }}>
                                         <Icon name="lock-outline" size={23} color={'#363636'} />
-                                        <Text style={{ color: '#5f5f5f', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>Password</Text>
+                                        <Text style={{ color: '#000', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>Password</Text>
                                     </View>
 
                                     <View style={{ alignSelf: "center", width: "88%", paddingHorizontal: 15, backgroundColor: "#fff", elevation: 8, borderRadius: 8, borderColor: isPasswordFocused ? purple : "", borderWidth: isPasswordFocused ? 1.5 : 0, marginTop: 4 }}>

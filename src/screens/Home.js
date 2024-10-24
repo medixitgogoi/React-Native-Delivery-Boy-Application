@@ -1,25 +1,59 @@
-import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useRef } from 'react';
+import { View, Text, Image, TouchableOpacity, StatusBar, Animated, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Feather';
 import { purple } from '../utils/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', padding: 20 }}>
-      <StatusBar
-        animated={true}
-        backgroundColor={'#F4F5FA'}
-        barStyle="dark-content"
-      />
+  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);  // State to track sidebar visibility
+  const sidebarAnim = useRef(new Animated.Value(-Dimensions.get('window').width * 0.75)).current; // Initial sidebar position
 
-      <View>
+  // Function to toggle sidebar
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    Animated.timing(sidebarAnim, {
+      toValue: isSidebarOpen ? -Dimensions.get('window').width * 0.75 : 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 15 }}>
+      <StatusBar animated={true} backgroundColor={'#F4F5FA'} barStyle="dark-content" />
+
+      {/* Sidebar */}
+      <Animated.View
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: Dimensions.get('window').width * 0.75,  // Sidebar width
+          backgroundColor: '#FFF',
+          transform: [{ translateX: sidebarAnim }],
+          zIndex: 1, // Ensure it overlaps other content
+        }}
+      >
+        <View style={{ flex: 1, padding: 20 }}>
+          <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 20 }}>Menu</Text>
+          {/* Add sidebar content like navigation links here */}
+          <Text>Home</Text>
+          <Text>Profile</Text>
+          <Text>Settings</Text>
+        </View>
+      </Animated.View>
+
+      {/* Main Content */}
+      <View style={{ marginTop: 10 }}>
         {/* Header */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <TouchableOpacity>
-            <Icon name="menu" size={30} color="#000" />
+          <TouchableOpacity onPress={toggleSidebar}>
+            <Icon name="menu" size={25} color="#000" />
           </TouchableOpacity>
+
           <View style={{ position: 'absolute', width: '100%' }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Dashboard</Text>
           </View>
@@ -28,7 +62,7 @@ const Home = () => {
         {/* Profile Section */}
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
           <Image
-            source={{ uri: 'https://via.placeholder.com/100' }} // Replace with actual profile image URL
+            source={{ uri: 'https://via.placeholder.com/100' }}
             style={{ width: 80, height: 80, borderRadius: 40, marginRight: 15 }}
           />
           <View>
@@ -39,25 +73,18 @@ const Home = () => {
 
         {/* Stats Section */}
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 20 }}>
-          {/* Completed Deliveries */}
           <View style={cardStyle('#E8F9FD')}>
             <Text style={cardTextStyle}>20</Text>
             <Text style={{ fontSize: 14, color: 'gray' }}>Completed Deliveries</Text>
           </View>
-
-          {/* Pending Deliveries */}
           <View style={cardStyle('#FFE3E4')}>
             <Text style={cardTextStyle}>100</Text>
             <Text style={{ fontSize: 14, color: 'gray' }}>Pending Deliveries</Text>
           </View>
-
-          {/* Total Collected */}
           <View style={cardStyle('#EEEFFF')}>
             <Text style={cardTextStyle}>50</Text>
             <Text style={{ fontSize: 14, color: 'gray' }}>Total Collected</Text>
           </View>
-
-          {/* Total Earnings */}
           <View style={cardStyle('#FFEEE2')}>
             <Text style={cardTextStyle}>26</Text>
             <Text style={{ fontSize: 14, color: 'gray' }}>Total Earnings</Text>
@@ -84,14 +111,14 @@ const cardStyle = (bgColor) => ({
   borderRadius: 10,
   marginBottom: 20,
   alignItems: 'center',
-  elevation: 1
+  elevation: 1,
 });
 
 const cardTextStyle = {
   fontSize: 20,
   fontWeight: 'bold',
   marginBottom: 5,
-  color: '#000'
+  color: '#000',
 };
 
 export default Home;
