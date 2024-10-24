@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import { purple } from '../utils/colors';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const Home = () => {
   return (
@@ -13,8 +14,7 @@ const Home = () => {
         barStyle="dark-content"
       />
 
-      <View style={{}}>
-
+      <View>
         {/* Header */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <TouchableOpacity>
@@ -33,7 +33,7 @@ const Home = () => {
           />
           <View>
             <Text style={{ fontSize: 18, fontWeight: 'bold', color: purple }}>Delivery Boy</Text>
-            <Text style={{ fontSize: 14, color: 'gray' }}>deliveryboy@gmail.com</Text>
+            <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray' }}>deliveryboy@gmail.com</Text>
           </View>
         </View>
 
@@ -84,12 +84,14 @@ const cardStyle = (bgColor) => ({
   borderRadius: 10,
   marginBottom: 20,
   alignItems: 'center',
+  elevation: 1
 });
 
 const cardTextStyle = {
   fontSize: 20,
   fontWeight: 'bold',
   marginBottom: 5,
+  color: '#000'
 };
 
 export default Home;
