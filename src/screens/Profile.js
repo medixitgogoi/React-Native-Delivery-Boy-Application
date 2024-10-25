@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar';
 import Icon2 from 'react-native-vector-icons/Octicons'; // Import the icon
 
 const Profile = () => {
-    
+
     const navigation = useNavigation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -20,20 +20,27 @@ const Profile = () => {
     };
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#F4F5FA' }}>
+        <View style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 15 }}>
             <StatusBar animated={true} backgroundColor={'#F4F5FA'} barStyle="dark-content" />
 
             {/* Sidebar Component */}
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} closeSidebar={closeSidebar} navigation={navigation} activeItem="Profile" />
 
-            {/* Main Profile Content */}
-            <View style={{ flex: 1, padding: 20 }}>
-                {/* Toggle Sidebar Icon */}
-                <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%', marginBottom: 20 }}>
+            {/* Header */}
+            <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+                <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%', height: 30, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Icon2 name="sidebar-collapse" size={16} color="#000" />
                 </TouchableOpacity>
 
-                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#000', marginBottom: 20 }}>Profile</Text>
+                <View style={{ width: '80%' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Profile</Text>
+                </View>
+
+                <View style={{ width: '10%' }} />
+            </View>
+
+            {/* Main Profile Content */}
+            <View style={{ flex: 1, paddingHorizontal: 20 }}>
 
                 <View style={{ alignItems: 'center', marginBottom: 20 }}>
                     <Image

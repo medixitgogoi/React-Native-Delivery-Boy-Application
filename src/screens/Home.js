@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
 
 const Home = () => {
-  
+
   const navigation = useNavigation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -33,20 +33,21 @@ const Home = () => {
       {/* Sidebar Component */}
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} closeSidebar={closeSidebar} navigation={navigation} activeItem="Home" />
 
-      {/* Main Content */}
-      <View style={{ marginTop: 10 }}>
-        {/* Header */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
-          <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%' }}>
-            <Icon2 name="sidebar-collapse" size={16} color="#000" />
-          </TouchableOpacity>
+      {/* Header */}
+      <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+        <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%', height: 30, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+          <Icon2 name="sidebar-collapse" size={16} color="#000" />
+        </TouchableOpacity>
 
-          <View style={{ width: '80%' }}>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Today's Orders</Text>
-          </View>
-
-          <View style={{ width: '10%' }} />
+        <View style={{ width: '80%' }}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Today's Orders</Text>
         </View>
+
+        <View style={{ width: '10%' }} />
+      </View>
+
+      {/* Main Content */}
+      <View style={{}}>
 
         {/* Profile Section */}
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
