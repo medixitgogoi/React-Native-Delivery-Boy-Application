@@ -33,7 +33,6 @@ const SplashScreen = () => {
                 colors={[green, '#c4a6fe']}
                 style={{ height: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}
             >
-
                 <View style={{ height: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <Animated.View style={{ opacity: fadeAnim }}>
                         <Image
@@ -46,7 +45,6 @@ const SplashScreen = () => {
                         />
                     </Animated.View>
                 </View>
-
             </LinearGradient>
         </SafeAreaView>
     );
