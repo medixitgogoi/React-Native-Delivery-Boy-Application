@@ -1,21 +1,29 @@
 import { useState, useRef } from 'react';
-import { View, Text, Image, TouchableOpacity, StatusBar, Animated, Dimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StatusBar, Animated, Dimensions, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { purple } from '../utils/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarAnim = useRef(new Animated.Value(-Dimensions.get('window').width * 0.5)).current;
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);  // State to track sidebar visibility
-  const sidebarAnim = useRef(new Animated.Value(-Dimensions.get('window').width * 0.75)).current; // Initial sidebar position
-
-  // Function to toggle sidebar
+  // Toggle sidebar
   const toggleSidebar = () => {
-    console.log('clicked')
     setIsSidebarOpen(!isSidebarOpen);
     Animated.timing(sidebarAnim, {
-      toValue: isSidebarOpen ? -Dimensions.get('window').width * 0.75 : 0,
+      toValue: isSidebarOpen ? -Dimensions.get('window').width * 0.5 : 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  // Close sidebar function
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+    Animated.timing(sidebarAnim, {
+      toValue: -Dimensions.get('window').width * 0.5,
       duration: 300,
       useNativeDriver: true,
     }).start();
@@ -25,7 +33,7 @@ const Home = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 15 }}>
       <StatusBar
         animated={true}
-        backgroundColor={isSidebarOpen ? '#fff' : '#F4F5FA'}
+        backgroundColor={'#F4F5FA'}
         barStyle="dark-content"
       />
 
@@ -36,32 +44,58 @@ const Home = () => {
           left: 0,
           top: 0,
           bottom: 0,
-          width: Dimensions.get('window').width * 0.50,  // Sidebar width
+          width: Dimensions.get('window').width * 0.5,
           backgroundColor: '#FFF',
           transform: [{ translateX: sidebarAnim }],
-          zIndex: 1, // Ensure it overlaps other content
+          zIndex: 2,
+          borderRightColor: purple,
         }}
       >
         <View style={{ flex: 1, padding: 20 }}>
           <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 20, color: '#000' }}>Menu</Text>
-          {/* Add sidebar content like navigation links here */}
-          <Text style={{ color: '#000' }}>Home</Text>
-          <Text style={{ color: '#000' }}>Profile</Text>
-          <Text style={{ color: '#000' }}>Settings</Text>
+
+          {/* Sidebar Items */}
+          <TouchableOpacity onPress={closeSidebar}>
+            <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>Home</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={closeSidebar}>
+            <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>Profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={closeSidebar}>
+            <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>Settings</Text>
+          </TouchableOpacity>
         </View>
       </Animated.View>
+
+      {/* Dim Background and Close Sidebar on Outside Press */}
+      {isSidebarOpen && (
+        <Pressable
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1,
+          }}
+          onPress={closeSidebar}
+        />
+      )}
 
       {/* Main Content */}
       <View style={{ marginTop: 10 }}>
         {/* Header */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <TouchableOpacity onPress={toggleSidebar}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+          <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%' }}>
             <Icon name="menu" size={25} color="#000" />
           </TouchableOpacity>
 
-          <View style={{ width: '100%' }}>
+          <View style={{ width: '80%' }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Dashboard</Text>
           </View>
+
+          <View style={{ width: '10%' }} />
         </View>
 
         {/* Profile Section */}
