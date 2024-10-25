@@ -1,19 +1,25 @@
 import { useState, useRef } from 'react';
 import { View, Text, Image, TouchableOpacity, StatusBar, Animated, Dimensions, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { purple } from '../utils/colors';
+import Icon2 from 'react-native-vector-icons/Octicons';
+import Icon3 from 'react-native-vector-icons/Ionicons';
+import { green, purple } from '../utils/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+
+  const navigation = useNavigation();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const sidebarAnim = useRef(new Animated.Value(-Dimensions.get('window').width * 0.5)).current;
+  const sidebarAnim = useRef(new Animated.Value(-Dimensions.get('window').width * 0.6)).current;
 
   // Toggle sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     Animated.timing(sidebarAnim, {
-      toValue: isSidebarOpen ? -Dimensions.get('window').width * 0.5 : 0,
+      toValue: isSidebarOpen ? -Dimensions.get('window').width * 0.6 : 0,
       duration: 300,
       useNativeDriver: true,
     }).start();
@@ -23,11 +29,16 @@ const Home = () => {
   const closeSidebar = () => {
     setIsSidebarOpen(false);
     Animated.timing(sidebarAnim, {
-      toValue: -Dimensions.get('window').width * 0.5,
+      toValue: -Dimensions.get('window').width * 0.60,
       duration: 300,
       useNativeDriver: true,
     }).start();
   };
+
+  const profileHandler = () => {
+    navigation.navigate('Profile');
+    closeSidebar();
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 15 }}>
@@ -44,27 +55,52 @@ const Home = () => {
           left: 0,
           top: 0,
           bottom: 0,
-          width: Dimensions.get('window').width * 0.5,
-          backgroundColor: '#FFF',
+          width: Dimensions.get('window').width * 0.6,
+          backgroundColor: '#F4F5FA',
           transform: [{ translateX: sidebarAnim }],
           zIndex: 2,
-          borderRightColor: purple,
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          paddingBottom: 20
         }}
       >
-        <View style={{ flex: 1, padding: 20 }}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 20, color: '#000' }}>Menu</Text>
+        <View style={{ flex: 1, paddingVertical: 10 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 5 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+              <Image
+                source={require("../assets/splashLogo.png")}
+                style={{
+                  width: 90,
+                  height: 30,
+                  resizeMode: 'contain',
+                }}
+              />
+            </View>
+
+            <TouchableOpacity onPress={closeSidebar} style={{ paddingRight: 5 }}>
+              <Icon2 name="sidebar-expand" size={16} color="#000" />
+            </TouchableOpacity>
+          </View>
 
           {/* Sidebar Items */}
-          <TouchableOpacity onPress={closeSidebar}>
-            <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={closeSidebar}>
-            <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={closeSidebar}>
-            <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>Settings</Text>
-          </TouchableOpacity>
+          <View style={{ marginTop: 25, paddingHorizontal: 10 }}>
+            <TouchableOpacity onPress={closeSidebar} style={{ flexDirection: 'row', marginVertical: 5, paddingVertical: 10, alignItems: 'center', backgroundColor: green, paddingHorizontal: 8, borderRadius: 10 }}>
+              <Icon name="today" size={20} color="#000" style={{ marginRight: 8 }} />
+              <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Today's Orders</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={profileHandler} style={{ flexDirection: 'row', paddingVertical: 10, marginVertical: 5, alignItems: 'center', backgroundColor: green, paddingHorizontal: 8, borderRadius: 10 }}>
+              <Icon name="person" size={20} color="#000" style={{ marginRight: 8 }} />
+              <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Profile</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
+
+        <TouchableOpacity onPress={closeSidebar} style={{ flexDirection: 'row', paddingVertical: 10, marginVertical: 5, alignItems: 'center', backgroundColor: purple, paddingHorizontal: 8, borderRadius: 10, marginHorizontal: 10 }}>
+          <Icon3 name="log-out" size={24} color="#fff" style={{ marginRight: 8 }} />
+          <Text style={{ fontSize: responsiveFontSize(2.2), color: '#fff', fontWeight: '500' }}>Log Out</Text>
+        </TouchableOpacity>
       </Animated.View>
 
       {/* Dim Background and Close Sidebar on Outside Press */}
@@ -76,7 +112,7 @@ const Home = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.4)',
             zIndex: 1,
           }}
           onPress={closeSidebar}
@@ -88,7 +124,7 @@ const Home = () => {
         {/* Header */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
           <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%' }}>
-            <Icon name="menu" size={25} color="#000" />
+            <Icon2 name="sidebar-collapse" size={16} color="#000" />
           </TouchableOpacity>
 
           <View style={{ width: '80%' }}>
