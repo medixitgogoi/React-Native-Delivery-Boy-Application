@@ -23,6 +23,11 @@ const Login = () => {
 
     const [errors, setErrors] = useState({});
 
+    // Login.js
+    const handleLogin = () => {
+        navigation.replace("Home");
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, height: '100%', backgroundColor: "#fff", flexDirection: "column", }}>
             <StatusBar
@@ -111,7 +116,7 @@ const Login = () => {
                                 </View>
 
                                 {/* Log in button */}
-                                <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ alignSelf: "center", width: "88%", height: 55, marginBottom: 20, marginTop: errors.password ? 0 : 10 }}>
+                                <TouchableOpacity onPress={handleLogin} style={{ alignSelf: "center", width: "88%", height: 55, marginBottom: 20, marginTop: errors.password ? 0 : 10 }}>
                                     <LinearGradient
                                         colors={[green, purple]}
                                         start={{ x: 0, y: 0 }}
