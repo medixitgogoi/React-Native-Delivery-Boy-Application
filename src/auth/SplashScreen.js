@@ -30,7 +30,7 @@ const SplashScreen = () => {
             />
 
             <LinearGradient
-                colors={[green, purple]}
+                colors={[green, '#c4a6fe']}
                 style={{ height: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}
             >
 

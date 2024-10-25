@@ -27,12 +27,13 @@ const Sidebar = ({ isOpen, toggleSidebar, closeSidebar, navigation, activeItem }
 
     const itemStyle = (item) => ({
         flexDirection: 'row',
-        marginVertical: 5,
+        marginVertical: 6,
         paddingVertical: 10,
         alignItems: 'center',
         backgroundColor: activeItem === item ? green : 'white',
         paddingHorizontal: 8,
         borderRadius: 10,
+        elevation: activeItem === item ? 1 : 0,
     });
 
     return (
