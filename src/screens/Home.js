@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { View, Text, Image, TouchableOpacity, StatusBar, Animated, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { purple } from '../utils/colors';
@@ -6,12 +6,13 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
-  
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);  // State to track sidebar visibility
   const sidebarAnim = useRef(new Animated.Value(-Dimensions.get('window').width * 0.75)).current; // Initial sidebar position
 
   // Function to toggle sidebar
   const toggleSidebar = () => {
+    console.log('clicked')
     setIsSidebarOpen(!isSidebarOpen);
     Animated.timing(sidebarAnim, {
       toValue: isSidebarOpen ? -Dimensions.get('window').width * 0.75 : 0,
@@ -22,7 +23,11 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 15 }}>
-      <StatusBar animated={true} backgroundColor={'#F4F5FA'} barStyle="dark-content" />
+      <StatusBar
+        animated={true}
+        backgroundColor={isSidebarOpen ? '#fff' : '#F4F5FA'}
+        barStyle="dark-content"
+      />
 
       {/* Sidebar */}
       <Animated.View
@@ -31,18 +36,18 @@ const Home = () => {
           left: 0,
           top: 0,
           bottom: 0,
-          width: Dimensions.get('window').width * 0.75,  // Sidebar width
+          width: Dimensions.get('window').width * 0.50,  // Sidebar width
           backgroundColor: '#FFF',
           transform: [{ translateX: sidebarAnim }],
           zIndex: 1, // Ensure it overlaps other content
         }}
       >
         <View style={{ flex: 1, padding: 20 }}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 20 }}>Menu</Text>
+          <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 20, color: '#000' }}>Menu</Text>
           {/* Add sidebar content like navigation links here */}
-          <Text>Home</Text>
-          <Text>Profile</Text>
-          <Text>Settings</Text>
+          <Text style={{ color: '#000' }}>Home</Text>
+          <Text style={{ color: '#000' }}>Profile</Text>
+          <Text style={{ color: '#000' }}>Settings</Text>
         </View>
       </Animated.View>
 
@@ -54,7 +59,7 @@ const Home = () => {
             <Icon name="menu" size={25} color="#000" />
           </TouchableOpacity>
 
-          <View style={{ position: 'absolute', width: '100%' }}>
+          <View style={{ width: '100%' }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Dashboard</Text>
           </View>
         </View>

@@ -13,7 +13,7 @@ const SplashScreen = () => {
         // Start the fade-in animation when the component is mounted
         Animated.timing(fadeAnim, {
             toValue: 1, // Fade to opacity 1
-            duration: 1800, // Duration of animation in ms
+            duration: 1200, // Duration of animation in ms
             useNativeDriver: true, // Use native driver for better performance
         }).start(() => {
             // After the animation completes, navigate to the Login screen
