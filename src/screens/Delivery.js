@@ -35,9 +35,9 @@ const Delivery = ({ route }) => {
             </View>
 
             {/* Customer Details */}
-            <View style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 5, elevation: 0.4, borderRadius: 15, borderColor: '#c7f5f7', borderWidth: 0.2 }}>
+            <View style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 5, borderRadius: 15, elevation: 2 }}>
                 <LinearGradient
-                    colors={['#a8eff2', '#FFFFFF']}
+                    colors={['#c9f5f7', '#FFFFFF', '#c9f5f7']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={{
