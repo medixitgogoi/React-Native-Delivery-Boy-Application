@@ -17,12 +17,18 @@ const Delivery = ({ route }) => {
     const navigation = useNavigation();
 
     const order = route.params.data;
+
     const [isDelivered, setIsDelivered] = useState(false);
+    const [upi, setUpi] = useState(false);
 
     const handleDeliveryConfirmation = () => {
         setIsDelivered(true);
         Alert.alert('Order Delivered', 'The order has been marked as delivered.');
     };
+
+    const handleUpiPayment = () => {
+        setUpi(prev => !prev);
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', padding: 12 }}>
@@ -70,38 +76,48 @@ const Delivery = ({ route }) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                             <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
                         </View>
                     </View>
                 </LinearGradient>
             </View>
 
             {/* Conditional Payment/Delivery Options */}
-            {order.paymentStatus === 'UPI' ? (
-                // Paid via UPI
-                <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ backgroundColor: '#6ae4e9', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 20 }}>
-                    <Text style={{ color: '#000', fontWeight: '700' }}>I have delivered the order</Text>
-                </TouchableOpacity>
-            ) : (
+            {order.paymentStatus === 'COD' && (
                 // COD with payment options
                 <View style={{ marginTop: 30 }}>
                     <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
 
-                    <View style={{ flexDirection: 'row', gap: 15, marginBottom: 30 }}>
-                        <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ backgroundColor: '#6ae4e9', padding: 15, borderRadius: 10, width: '45%', alignItems: 'center' }}>
-                            <Icon3 name="money" size={24} color="#000" />
-                            <Text style={{ color: '#000', fontWeight: '700' }}>Cash</Text>
+                    <View style={{ flexDirection: 'row', gap: 15, marginBottom: 30, alignItems: 'center', justifyContent: 'space-between' }}>
+                        <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ backgroundColor: green, borderColor: '#18a0a6', borderWidth: 1, padding: 10, borderRadius: 10, width: '48%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 5 }}>
+                            <Icon3 name="money" size={20} color="#000" />
+                            <Text style={{ color: '#000', fontWeight: '600' }}>By Cash</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => setIsDelivered(true)} style={{ backgroundColor: 'c#FFF', padding: 15, borderRadius: 10, width: '45%', alignItems: 'center', borderColor: '#000', borderWidth: 1 }}>
-                            {/* <QRCode value={`upi://pay?pa=merchantUPI&pn=${order.customerName}&am=${order.price.replace('₹', '')}`} size={80} /> */}
-                            <Text style={{ color: '#000', fontWeight: '700', marginTop: 10 }}>Pay by UPI</Text>
+                        <TouchableOpacity onPress={handleUpiPayment} style={{ backgroundColor: purple, borderColor: '#18a0a6', borderWidth: 1, padding: 10, borderRadius: 10, width: '48%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 5 }}>
+                            <Icon2 name="credit-card" size={20} color="#fff" />
+                            <Text style={{ color: '#fff', fontWeight: '700' }}>By UPI</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             )}
+
+            {/* QR Code */}
+            {upi && (
+                <View style={{ elevation: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Image
+                        source={require('../assets/qr.png')}
+                        style={{ width: 300, height: 300, marginRight: 15 }}
+                    />
+                </View>
+            )}
+
+            {/* Delivery button */}
+            <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ position: 'absolute', bottom: 10, width: '100%', backgroundColor: '#6ae4e9', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 20, alignSelf: 'center' }}>
+                <Text style={{ color: '#000', fontWeight: '700' }}>I have delivered the order</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
-};
+}
 
 export default Delivery;
