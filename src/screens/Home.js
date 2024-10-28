@@ -60,107 +60,10 @@ const ordersData = [
   },
 ];
 
-const OrderCard = ({ order }) => {
-  return (
-    <View style={{
-      backgroundColor: '#FFF',
-      borderRadius: 15,
-      padding: 15,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
-      shadowOpacity: 0.2,
-      shadowRadius: 5,
-      elevation: 5,
-    }}>
-      {/* Customer Details */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-          <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-          <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
-        </View>
-      </View>
-
-      {/* Location */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-        <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
-      </View>
-
-      {/* Order Description */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-        <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
-      </View>
-
-      {/* Price and Payment Status */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
-          <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
-        </View>
-      </View>
-
-      {/* Accept/Reject Buttons */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '100%' }}>
-        {/* Accept */}
-        <TouchableOpacity style={{
-          backgroundColor: '#6ae4e9',
-          paddingVertical: 10,
-          width: '48%',
-          borderRadius: 8,
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 5,
-          flexDirection: 'row',
-          elevation: 1
-        }}>
-          <Text style={{ color: '#000', fontWeight: '700' }}>Accept</Text>
-          <Icon name="check-circle" size={20} color="#000" style={{ marginRight: 5 }} />
-        </TouchableOpacity>
-
-        {/* Reject */}
-        <TouchableOpacity style={{
-          backgroundColor: '#FF6347',
-          paddingVertical: 10,
-          width: '48%',
-          borderRadius: 8,
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'row',
-          gap: 5,
-          elevation: 1
-        }}>
-          <Text style={{ color: '#FFF', fontWeight: '700' }}>Reject</Text>
-          <Icon name="cancel" size={20} color="#fff" style={{ marginRight: 5 }} />
-        </TouchableOpacity>
-      </View>
-
-      {/* Payment status */}
-      <View style={{ position: 'absolute', top: 10, right: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{
-          fontSize: responsiveFontSize(1.6),
-          fontWeight: '700',
-          color: order.paymentStatus === 'COD' ? '#FF6347' : '#1fc9d0',
-          backgroundColor: order.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
-          paddingHorizontal: 8,
-          paddingVertical: 3,
-          borderRadius: 6,
-          borderColor: order.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
-          borderWidth: 0.6
-        }}>
-          {order.paymentStatus}
-        </Text>
-      </View>
-    </View>
-  );
-};
-
 const Home = () => {
 
   const navigation = useNavigation();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -169,6 +72,107 @@ const Home = () => {
 
   const closeSidebar = () => {
     setIsSidebarOpen(false);
+  };
+
+  const OrderCard = ({ order }) => {
+    return (
+      <View style={{
+        backgroundColor: '#FFF',
+        borderRadius: 15,
+        padding: 15,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        elevation: 5,
+      }}>
+        {/* Customer Details */}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+            <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+          </View>
+        </View>
+
+        {/* Location */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+          <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
+        </View>
+
+        {/* Order Description */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+          <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
+        </View>
+
+        {/* Price and Payment Status */}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+            <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+          </View>
+        </View>
+
+        {/* Accept/Reject Buttons */}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '100%' }}>
+          {/* Accept */}
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#6ae4e9',
+              paddingVertical: 10,
+              width: '48%',
+              borderRadius: 8,
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 5,
+              flexDirection: 'row',
+              elevation: 1
+            }}
+            onPress={() => navigation.navigate('Delivery', { data: order })}
+          >
+            <Text style={{ color: '#000', fontWeight: '700' }}>Accept</Text>
+            <Icon name="check-circle" size={20} color="#000" style={{ marginRight: 5 }} />
+          </TouchableOpacity>
+
+          {/* Reject */}
+          <TouchableOpacity style={{
+            backgroundColor: '#FF6347',
+            paddingVertical: 10,
+            width: '48%',
+            borderRadius: 8,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            gap: 5,
+            elevation: 1
+          }}>
+            <Text style={{ color: '#FFF', fontWeight: '700' }}>Reject</Text>
+            <Icon name="cancel" size={20} color="#fff" style={{ marginRight: 5 }} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Payment status */}
+        <View style={{ position: 'absolute', top: 10, right: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{
+            fontSize: responsiveFontSize(1.6),
+            fontWeight: '700',
+            color: order.paymentStatus === 'COD' ? '#FF6347' : '#1fc9d0',
+            backgroundColor: order.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
+            paddingHorizontal: 8,
+            paddingVertical: 3,
+            borderRadius: 6,
+            borderColor: order.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+            borderWidth: 0.6
+          }}>
+            {order.paymentStatus}
+          </Text>
+        </View>
+      </View>
+    );
   };
 
   return (

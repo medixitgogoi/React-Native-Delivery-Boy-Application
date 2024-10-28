@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
+import Icon2 from 'react-native-vector-icons/Octicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
-import QRCode from 'react-native-qrcode-svg';
+import Icon4 from 'react-native-vector-icons/FontAwesome6';
+import Icon5 from 'react-native-vector-icons/Entypo';
+import Icon6 from 'react-native-vector-icons/MaterialIcons';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { purple, green } from '../utils/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const Delivery = ({ route }) => {
 
-    const { order } = route.params;
+    const navigation = useNavigation();
+
+    const order = route.params.data;
     const [isDelivered, setIsDelivered] = useState(false);
 
     const handleDeliveryConfirmation = () => {
@@ -28,11 +34,46 @@ const Delivery = ({ route }) => {
             </View>
 
             {/* Customer Details */}
-            <View style={{ backgroundColor: '#FFF', padding: 15, borderRadius: 10, marginBottom: 20, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 5, elevation: 5 }}>
-                <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe', marginBottom: 10 }}>{order.customerName}</Text>
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#555' }}>Location: {order.location}</Text>
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#555', marginTop: 10 }}>Order: {order.orderDescription}</Text>
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#555', marginTop: 10 }}>Price: {order.price}</Text>
+            <View style={{
+                backgroundColor: '#FFF',
+                borderRadius: 15,
+                padding: 15,
+                shadowColor: '#000',
+                shadowOffset: {
+                    width: 0,
+                    height: 4,
+                },
+                shadowOpacity: 0.2,
+                shadowRadius: 5,
+                elevation: 5,
+            }}>
+                {/* Customer Details */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                        <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+                        <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+                    </View>
+                </View>
+
+                {/* Location */}
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+                    <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
+                </View>
+
+                {/* Order Description */}
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+                    <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
+                </View>
+
+                {/* Price and Payment Status */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+                        <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+                    </View>
+                </View>
             </View>
 
             {/* Conditional Payment/Delivery Options */}
@@ -51,7 +92,7 @@ const Delivery = ({ route }) => {
                             <Text style={{ color: '#000', fontWeight: '700' }}>Cash</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setIsDelivered(true)} style={{ backgroundColor: '#FFF', padding: 15, borderRadius: 10, width: '45%', alignItems: 'center', borderColor: '#000', borderWidth: 1 }}>
-                            <QRCode value={`upi://pay?pa=merchantUPI&pn=${order.customerName}&am=${order.price.replace('₹', '')}`} size={80} />
+                            {/* <QRCode value={`upi://pay?pa=merchantUPI&pn=${order.customerName}&am=${order.price.replace('₹', '')}`} size={80} /> */}
                             <Text style={{ color: '#000', fontWeight: '700', marginTop: 10 }}>Pay by UPI</Text>
                         </TouchableOpacity>
                     </View>
