@@ -40,7 +40,7 @@ const Home = () => {
         </TouchableOpacity>
 
         <View style={{ width: '80%' }}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Today's Orders</Text>
+          <Text style={{ fontSize: 20, fontWeight: '700', color: purple, textAlign: 'center' }}>Today's Orders</Text>
         </View>
 
         <View style={{ width: '10%' }} />
@@ -50,12 +50,15 @@ const Home = () => {
       <View style={{}}>
         {/* Profile Section */}
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
-          <Image
-            source={{ uri: 'https://via.placeholder.com/100' }}
-            style={{ width: 80, height: 80, borderRadius: 40, marginRight: 15 }}
-          />
+          <View style={{ elevation: 1, width: 80, height: 80, }}>
+            <Image
+              source={require('../assets/avatar.png')}
+              style={{ width: '100%', height: '100%', borderRadius: 40, marginRight: 15 }}
+            />
+          </View>
+
           <View>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', color: purple }}>Delivery Boy</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>Delivery Boy</Text>
             <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray' }}>deliveryboy@gmail.com</Text>
           </View>
         </View>
