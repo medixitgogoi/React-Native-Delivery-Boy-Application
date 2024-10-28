@@ -1,4 +1,3 @@
-// Sidebar.js
 import { useEffect, useRef } from 'react';
 import { View, Text, Image, TouchableOpacity, Animated, Dimensions, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -58,7 +57,7 @@ const Sidebar = ({ isOpen, toggleSidebar, closeSidebar, navigation, activeItem }
                         <Image
                             source={require("../assets/splashLogo.png")}
                             style={{
-                                width: 90,
+                                width: 100,
                                 height: 30,
                                 resizeMode: 'contain',
                             }}
