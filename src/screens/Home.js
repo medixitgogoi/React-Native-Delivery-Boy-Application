@@ -3,6 +3,9 @@ import { View, Text, Image, TouchableOpacity, StatusBar, FlatList } from 'react-
 import Icon2 from 'react-native-vector-icons/Octicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
+import Icon4 from 'react-native-vector-icons/FontAwesome6';
+import Icon5 from 'react-native-vector-icons/Entypo';
+import Icon6 from 'react-native-vector-icons/MaterialIcons';
 import { purple, green } from '../utils/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -63,46 +66,46 @@ const OrderCard = ({ order }) => {
       backgroundColor: '#FFF',
       borderRadius: 15,
       padding: 15,
-      marginBottom: 20,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4 },
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
       shadowOpacity: 0.2,
       shadowRadius: 5,
       elevation: 5,
     }}>
       {/* Customer Details */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-          <Icon3 name="user-circle" size={20} color="#000" style={{ marginRight: 5 }} />
-          <Text style={{ fontSize: 18, fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+          <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
         </View>
-        <Text style={{ fontSize: 14, color: '#888' }}>{order.deliveryTime}</Text>
       </View>
 
       {/* Location */}
-      <Text style={{ fontSize: 14, color: '#555', marginBottom: 10 }}>{order.location}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+        <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
+      </View>
 
       {/* Order Description */}
-      <Text style={{ fontSize: 16, color: '#333', marginBottom: 15 }}>{order.orderDescription}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+        <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
+      </View>
 
       {/* Price and Payment Status */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
-        <Text style={{ fontSize: 16, fontWeight: '700', color: '#000' }}>{order.price}</Text>
-        <Text style={{
-          fontSize: 14,
-          fontWeight: '700',
-          color: order.paymentStatus === 'COD' ? '#FF6347' : '#6ae4e9',
-          backgroundColor: order.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
-          paddingHorizontal: 10,
-          paddingVertical: 4,
-          borderRadius: 12,
-        }}>
-          {order.paymentStatus}
-        </Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+          <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+        </View>
       </View>
 
       {/* Accept/Reject Buttons */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '100%' }}>
+        {/* Accept */}
         <TouchableOpacity style={{
           backgroundColor: '#6ae4e9',
           paddingVertical: 10,
@@ -111,11 +114,14 @@ const OrderCard = ({ order }) => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: 5,
-          flexDirection: 'row'
+          flexDirection: 'row',
+          elevation: 1
         }}>
           <Text style={{ color: '#000', fontWeight: '700' }}>Accept</Text>
           <Icon name="check-circle" size={20} color="#000" style={{ marginRight: 5 }} />
         </TouchableOpacity>
+
+        {/* Reject */}
         <TouchableOpacity style={{
           backgroundColor: '#FF6347',
           paddingVertical: 10,
@@ -124,11 +130,29 @@ const OrderCard = ({ order }) => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'row',
-          gap: 5
+          gap: 5,
+          elevation: 1
         }}>
           <Text style={{ color: '#FFF', fontWeight: '700' }}>Reject</Text>
           <Icon name="cancel" size={20} color="#fff" style={{ marginRight: 5 }} />
         </TouchableOpacity>
+      </View>
+
+      {/* Payment status */}
+      <View style={{ position: 'absolute', top: 10, right: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{
+          fontSize: responsiveFontSize(1.6),
+          fontWeight: '700',
+          color: order.paymentStatus === 'COD' ? '#FF6347' : '#1fc9d0',
+          backgroundColor: order.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
+          paddingHorizontal: 8,
+          paddingVertical: 3,
+          borderRadius: 6,
+          borderColor: order.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+          borderWidth: 0.6
+        }}>
+          {order.paymentStatus}
+        </Text>
       </View>
     </View>
   );
@@ -185,7 +209,7 @@ const Home = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <OrderCard order={item} />}
         showsVerticalScrollIndicator={true}
-        contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 10, gap: 15 }}
+        contentContainerStyle={{ paddingHorizontal: 15, paddingTop: 10, gap: 15, paddingBottom: 15 }}
       />
     </SafeAreaView>
   );
