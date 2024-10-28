@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StatusBar, FlatList } from 'react-native';
 import Icon2 from 'react-native-vector-icons/Octicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 import { purple, green } from '../utils/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -71,7 +72,10 @@ const OrderCard = ({ order }) => {
     }}>
       {/* Customer Details */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-        <Text style={{ fontSize: 18, fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+          <Icon3 name="user-circle" size={20} color="#000" style={{ marginRight: 5 }} />
+          <Text style={{ fontSize: 18, fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+        </View>
         <Text style={{ fontSize: 14, color: '#888' }}>{order.deliveryTime}</Text>
       </View>
 
