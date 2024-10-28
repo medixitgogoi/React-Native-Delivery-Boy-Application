@@ -35,7 +35,7 @@ const Delivery = ({ route }) => {
 
             {/* Customer Details */}
             <View style={{
-                backgroundColor: '#FFF',
+                backgroundColor: green,
                 borderRadius: 15,
                 padding: 15,
                 shadowColor: '#000',
@@ -45,10 +45,10 @@ const Delivery = ({ route }) => {
                 },
                 shadowOpacity: 0.2,
                 shadowRadius: 5,
-                elevation: 5,
+                elevation: 2,
             }}>
                 {/* Customer Details */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                         <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
                         <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
@@ -56,13 +56,13 @@ const Delivery = ({ route }) => {
                 </View>
 
                 {/* Location */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
                     <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
                     <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
                 </View>
 
                 {/* Order Description */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
                     <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
                     <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
                 </View>
