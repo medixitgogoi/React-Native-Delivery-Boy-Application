@@ -10,6 +10,7 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { purple, green } from '../utils/colors';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Delivery = ({ route }) => {
 
@@ -24,7 +25,7 @@ const Delivery = ({ route }) => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', padding: 15 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', padding: 12 }}>
             {/* Header */}
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -34,46 +35,44 @@ const Delivery = ({ route }) => {
             </View>
 
             {/* Customer Details */}
-            <View style={{
-                backgroundColor: green,
-                borderRadius: 15,
-                padding: 15,
-                shadowColor: '#000',
-                shadowOffset: {
-                    width: 0,
-                    height: 4,
-                },
-                shadowOpacity: 0.2,
-                shadowRadius: 5,
-                elevation: 2,
-            }}>
-                {/* Customer Details */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                        <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                        <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+            <View style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 5, elevation: 0.4, borderRadius: 15, borderColor: '#c7f5f7', borderWidth: 0.2 }}>
+                <LinearGradient
+                    colors={['#a8eff2', '#FFFFFF']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={{
+                        borderRadius: 15,
+                        padding: 15,
+                    }}
+                >
+                    {/* Customer Details */}
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                            <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+                            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+                        </View>
                     </View>
-                </View>
 
-                {/* Location */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
-                    <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
-                </View>
-
-                {/* Order Description */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
-                    <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
-                </View>
-
-                {/* Price and Payment Status */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
-                        <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+                    {/* Location */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
+                        <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
                     </View>
-                </View>
+
+                    {/* Order Description */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
+                        <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
+                    </View>
+
+                    {/* Price and Payment Status */}
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+                            <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+                        </View>
+                    </View>
+                </LinearGradient>
             </View>
 
             {/* Conditional Payment/Delivery Options */}
