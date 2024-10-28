@@ -83,14 +83,16 @@ const Delivery = ({ route }) => {
                 </TouchableOpacity>
             ) : (
                 // COD with payment options
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: purple, marginBottom: 20 }}>Collect Payment</Text>
+                <View style={{ marginTop: 20 }}>
+                    <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
+
                     <View style={{ flexDirection: 'row', gap: 15, marginBottom: 30 }}>
                         <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ backgroundColor: '#6ae4e9', padding: 15, borderRadius: 10, width: '45%', alignItems: 'center' }}>
                             <Icon3 name="money" size={24} color="#000" />
                             <Text style={{ color: '#000', fontWeight: '700' }}>Cash</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => setIsDelivered(true)} style={{ backgroundColor: '#FFF', padding: 15, borderRadius: 10, width: '45%', alignItems: 'center', borderColor: '#000', borderWidth: 1 }}>
+
+                        <TouchableOpacity onPress={() => setIsDelivered(true)} style={{ backgroundColor: 'c#FFF', padding: 15, borderRadius: 10, width: '45%', alignItems: 'center', borderColor: '#000', borderWidth: 1 }}>
                             {/* <QRCode value={`upi://pay?pa=merchantUPI&pn=${order.customerName}&am=${order.price.replace('₹', '')}`} size={80} /> */}
                             <Text style={{ color: '#000', fontWeight: '700', marginTop: 10 }}>Pay by UPI</Text>
                         </TouchableOpacity>
