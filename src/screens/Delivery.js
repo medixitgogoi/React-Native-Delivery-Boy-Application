@@ -37,12 +37,13 @@ const Delivery = ({ route }) => {
             {/* Customer Details */}
             <View style={{ shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 5, borderRadius: 15, elevation: 2 }}>
                 <LinearGradient
-                    colors={['#c9f5f7', '#FFFFFF', '#c9f5f7']}
+                    colors={['#c9f5f7', '#FFFFFF', '#b9f2f5']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={{
                         borderRadius: 15,
-                        padding: 15,
+                        padding: 20,
+                        flexDirection: 'column',
                     }}
                 >
                     {/* Customer Details */}
@@ -67,7 +68,7 @@ const Delivery = ({ route }) => {
 
                     {/* Price and Payment Status */}
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                             <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
                             <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
                         </View>
@@ -83,7 +84,7 @@ const Delivery = ({ route }) => {
                 </TouchableOpacity>
             ) : (
                 // COD with payment options
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 30 }}>
                     <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
 
                     <View style={{ flexDirection: 'row', gap: 15, marginBottom: 30 }}>
