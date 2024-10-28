@@ -93,7 +93,7 @@ const Home = () => {
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
             <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#9f6efe' }}>{order?.customerName}</Text>
           </View>
         </View>
 
@@ -134,13 +134,13 @@ const Home = () => {
             }}
             onPress={() => navigation.navigate('Delivery', { data: order })}
           >
-            <Text style={{ color: '#000', fontWeight: '700' }}>Accept</Text>
+            <Text style={{ color: '#000', fontWeight: '600' }}>Accept</Text>
             <Icon name="check-circle" size={20} color="#000" style={{ marginRight: 5 }} />
           </TouchableOpacity>
 
           {/* Reject */}
           <TouchableOpacity style={{
-            backgroundColor: '#FF6347',
+            backgroundColor: '#ef2400',
             paddingVertical: 10,
             width: '48%',
             borderRadius: 8,
@@ -150,7 +150,7 @@ const Home = () => {
             gap: 5,
             elevation: 1
           }}>
-            <Text style={{ color: '#FFF', fontWeight: '700' }}>Reject</Text>
+            <Text style={{ color: '#FFF', fontWeight: '600' }}>Reject</Text>
             <Icon name="cancel" size={20} color="#fff" style={{ marginRight: 5 }} />
           </TouchableOpacity>
         </View>
