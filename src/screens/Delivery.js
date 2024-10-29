@@ -20,6 +20,7 @@ const Delivery = ({ route }) => {
 
     const [isDelivered, setIsDelivered] = useState(false);
     const [upi, setUpi] = useState(false);
+    const [paymentMode, setPaymentMode] = useState(null);
 
     const handleDeliveryConfirmation = () => {
         setIsDelivered(true);
@@ -28,7 +29,7 @@ const Delivery = ({ route }) => {
 
     const handleUpiPayment = () => {
         setUpi(prev => !prev);
-    }
+    };
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', padding: 12 }}>
@@ -88,14 +89,50 @@ const Delivery = ({ route }) => {
                     <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
 
                     <View style={{ flexDirection: 'row', gap: 15, marginBottom: 30, alignItems: 'center', justifyContent: 'space-between' }}>
-                        <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ backgroundColor: green, borderColor: '#18a0a6', borderWidth: 1, padding: 10, borderRadius: 10, width: '48%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 5 }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setPaymentMode(1)
+                                handleUpiPayment()
+                            }}
+                            style={{
+                                backgroundColor: paymentMode === 1 ? '#4CAF50' : green, // Highlighted color when selected
+                                borderColor: '#18a0a6',
+                                borderWidth: 1,
+                                padding: 10,
+                                borderRadius: 10,
+                                width: '48%',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                gap: 5
+                            }}
+                        >
                             <Icon3 name="money" size={20} color="#000" />
                             <Text style={{ color: '#000', fontWeight: '600' }}>By Cash</Text>
+                            {paymentMode === 1 && <Icon6 name="checkcircle" size={20} color="#000" />}
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={handleUpiPayment} style={{ backgroundColor: purple, borderColor: '#18a0a6', borderWidth: 1, padding: 10, borderRadius: 10, width: '48%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 5 }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setPaymentMode(2)
+                                handleUpiPayment()
+                            }}
+                            style={{
+                                backgroundColor: paymentMode === 2 ? '#8A2BE2' : purple, // Highlighted color when selected
+                                borderColor: '#18a0a6',
+                                borderWidth: 1,
+                                padding: 10,
+                                borderRadius: 10,
+                                width: '48%',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                gap: 5
+                            }}
+                        >
                             <Icon2 name="credit-card" size={20} color="#fff" />
                             <Text style={{ color: '#fff', fontWeight: '700' }}>By UPI</Text>
+                            {paymentMode === 2 && <Icon6 name="checkcircle" size={20} color="#fff" />}
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -112,10 +149,36 @@ const Delivery = ({ route }) => {
             )}
 
             {/* Delivery button */}
-            <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, position: 'absolute', bottom: 10, width: '100%', backgroundColor: '#5EC467', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 20, alignSelf: 'center' }}>
-                <Text style={{ color: '#000', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>I have delivered the order</Text>
-                <Icon6 name="checkcircle" size={20} color="#000" />
-            </TouchableOpacity>
+            {paymentMode === null ? (
+                <TouchableOpacity
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 5,
+                        position: 'absolute',
+                        bottom: 10,
+                        width: '100%',
+                        backgroundColor: '#B0B0B0', // Disabled grey color
+                        padding: 15,
+                        borderRadius: 10,
+                        marginTop: 20,
+                        alignSelf: 'center',
+                        opacity: 0.6 // Reduced opacity for a disabled look
+                    }}
+                    disabled={true} // Disables button interaction
+                >
+                    <Text style={{ color: '#6E6E6E', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>
+                        I have delivered the order
+                    </Text>
+                    <Icon6 name="checkcircle" size={20} color="#6E6E6E" />
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, position: 'absolute', bottom: 10, width: '100%', backgroundColor: '#5EC467', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 20, alignSelf: 'center' }}>
+                    <Text style={{ color: '#000', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>I have delivered the order</Text>
+                    <Icon6 name="checkcircle" size={20} color="#000" />
+                </TouchableOpacity>
+            )}
         </SafeAreaView>
     );
 }
