@@ -92,7 +92,7 @@ const Delivery = ({ route }) => {
                         <TouchableOpacity
                             onPress={() => {
                                 setPaymentMode(1)
-                                handleUpiPayment()
+                                setUpi(false);
                             }}
                             style={{
                                 backgroundColor: paymentMode === 1 ? '#4CAF50' : green, // Highlighted color when selected
