@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icon2 from 'react-native-vector-icons/Octicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
@@ -12,7 +12,6 @@ import { purple, green } from '../utils/colors';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Toast from 'react-native-toast-message';
-import { copyWithStructuralSharing } from '@reduxjs/toolkit/query';
 
 const Delivery = ({ route }) => {
 
@@ -95,58 +94,136 @@ const Delivery = ({ route }) => {
             </View>
 
             {/* Conditional Payment/Delivery Options */}
-            {order.paymentStatus === 'COD' && (
-                <View style={{ marginTop: 30 }}>
-                    <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
+            {order.paymentStatus === 'COD' ? (
+                <View style={{ marginTop: 25 }}>
+                    <Text style={{
+                        fontSize: responsiveFontSize(2.1),
+                        fontWeight: '600',
+                        color: "#000",
+                        marginBottom: 8,
+                    }}>
+                        Collect Payment
+                    </Text>
 
-                    <View style={{ flexDirection: 'row', marginBottom: 30, alignItems: 'center', justifyContent: 'space-between' }}>
-                        {/* By Cash */}
+                    <View style={{
+                        flexDirection: 'row',
+                        marginBottom: 30,
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                    }}>
+                        {/* By Cash Option */}
                         <TouchableOpacity
                             onPress={() => {
-                                setPaymentMode(1)
+                                setPaymentMode(1);
                                 setUpi(false);
                             }}
                             style={{
-                                backgroundColor: paymentMode === 1 ? '#000' : green, // Highlighted color when selected
+                                backgroundColor: paymentMode === 1 ? '#333' : green,
                                 borderColor: '#18a0a6',
                                 borderWidth: 1,
-                                padding: 10,
-                                borderRadius: 10,
+                                paddingVertical: 12,
+                                paddingHorizontal: 15,
+                                borderRadius: 12,
                                 width: '49%',
                                 alignItems: 'center',
                                 flexDirection: 'row',
                                 justifyContent: 'center',
-                                gap: 5
+                                gap: 6,
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 2 },
+                                shadowOpacity: 0.2,
+                                shadowRadius: 3,
+                                elevation: 2
                             }}
                         >
-                            <Icon3 name="money" size={20} color={paymentMode === 1 ? '#fff' : '#000'} />
-                            <Text style={{ color: paymentMode === 1 ? '#fff' : '#000', fontWeight: '600' }}>By Cash</Text>
-                            {paymentMode === 1 && <Icon6 name="checkcircle" size={20} color={paymentMode === 1 ? '#fff' : '#000'} />}
+                            <Icon3 name="money" size={20} color={paymentMode === 1 ? '#fff' : '#333'} />
+                            <Text style={{
+                                color: paymentMode === 1 ? '#fff' : '#333',
+                                fontWeight: '600',
+                                fontSize: responsiveFontSize(1.9)
+                            }}>
+                                By Cash
+                            </Text>
+                            {paymentMode === 1 && <Icon6 name="checkcircle" size={20} color="#fff" />}
                         </TouchableOpacity>
 
-                        {/* By UPI */}
+                        {/* By UPI Option */}
                         <TouchableOpacity
                             onPress={() => {
                                 setPaymentMode(2);
                                 handleUpiPayment();
                             }}
                             style={{
-                                backgroundColor: paymentMode === 2 ? '#000' : purple, // Highlighted color when selected
+                                backgroundColor: paymentMode === 2 ? '#333' : purple,
                                 borderColor: '#18a0a6',
                                 borderWidth: 1,
-                                padding: 10,
-                                borderRadius: 10,
+                                paddingVertical: 12,
+                                paddingHorizontal: 15,
+                                borderRadius: 12,
                                 width: '49%',
                                 alignItems: 'center',
                                 flexDirection: 'row',
                                 justifyContent: 'center',
-                                gap: 5
+                                gap: 6,
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 2 },
+                                shadowOpacity: 0.2,
+                                shadowRadius: 3,
+                                elevation: 2
                             }}
                         >
                             <Icon2 name="credit-card" size={20} color="#fff" />
-                            <Text style={{ color: '#fff', fontWeight: '700' }}>By UPI</Text>
+                            <Text style={{
+                                color: '#fff',
+                                fontWeight: '700',
+                                fontSize: responsiveFontSize(1.9)
+                            }}>
+                                By UPI
+                            </Text>
                             {paymentMode === 2 && <Icon6 name="checkcircle" size={20} color="#fff" />}
                         </TouchableOpacity>
+                    </View>
+                </View>
+            ) : (
+                <View style={{
+                    marginTop: 30,
+                    backgroundColor: '#E8F6E9',
+                    borderRadius: 15,
+                    padding: 20,
+                    alignItems: 'center',
+                    shadowColor: '#000',
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 5,
+                    elevation: 2
+                }}>
+                    <Icon6 name="checkcircle" size={40} color={green} style={{ marginBottom: 10 }} />
+
+                    <Text style={{ fontSize: responsiveFontSize(2.2), fontWeight: '700', color: '#000', textAlign: 'center' }}>
+                        Payment Received
+                    </Text>
+
+                    <Text style={{
+                        fontSize: responsiveFontSize(1.8),
+                        color: '#6E6E6E',
+                        textAlign: 'center',
+                        marginTop: 5
+                    }}>
+                        The order has been paid via UPI.
+                    </Text>
+
+                    <View style={{
+                        backgroundColor: '#F0FFF4',
+                        padding: 15,
+                        borderRadius: 10,
+                        marginTop: 15,
+                        width: '100%',
+                        alignItems: 'center',
+                        elevation: 1,
+                    }}>
+                        <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '600', color: '#333' }}>
+                            Amount Paid:  {order.price}
+                        </Text>
                     </View>
                 </View>
             )}
