@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/FontAwesome6';
 import Icon5 from 'react-native-vector-icons/Entypo';
-import Icon6 from 'react-native-vector-icons/MaterialIcons';
+import Icon6 from 'react-native-vector-icons/AntDesign';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { purple, green } from '../utils/colors';
@@ -84,7 +84,6 @@ const Delivery = ({ route }) => {
 
             {/* Conditional Payment/Delivery Options */}
             {order.paymentStatus === 'COD' && (
-                // COD with payment options
                 <View style={{ marginTop: 30 }}>
                     <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
 
@@ -113,8 +112,9 @@ const Delivery = ({ route }) => {
             )}
 
             {/* Delivery button */}
-            <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ position: 'absolute', bottom: 10, width: '100%', backgroundColor: '#6ae4e9', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 20, alignSelf: 'center' }}>
-                <Text style={{ color: '#000', fontWeight: '700' }}>I have delivered the order</Text>
+            <TouchableOpacity onPress={handleDeliveryConfirmation} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, position: 'absolute', bottom: 10, width: '100%', backgroundColor: '#5EC467', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 20, alignSelf: 'center' }}>
+                <Text style={{ color: '#000', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>I have delivered the order</Text>
+                <Icon6 name="checkcircle" size={20} color="#000" />
             </TouchableOpacity>
         </SafeAreaView>
     );
