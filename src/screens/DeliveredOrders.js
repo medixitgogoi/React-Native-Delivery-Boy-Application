@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
 import Icon2 from 'react-native-vector-icons/Octicons';
-import { green } from '../utils/colors';
+import { green, purple } from '../utils/colors';
 
 const DeliveredOrders = () => {
 
     const navigation = useNavigation();
-    
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [deliveredOrders, setDeliveredOrders] = useState([]);
 
@@ -36,21 +36,24 @@ const DeliveredOrders = () => {
     );
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#F4F5FA' }}>
+        <View style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 15 }}>
             <StatusBar animated={true} backgroundColor={'#F4F5FA'} barStyle="dark-content" />
 
             {/* Sidebar Component */}
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} closeSidebar={closeSidebar} navigation={navigation} activeItem="DeliveredOrders" />
 
             {/* Header */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 20, paddingHorizontal: 15 }}>
-                <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%', height: 30, justifyContent: 'center', alignItems: 'flex-start' }}>
+            <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+                <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%', height: 30, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Icon2 name="sidebar-collapse" size={16} color="#000" />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center', width: '80%' }}>Delivered Orders</Text>
+
+                <View style={{ width: '80%' }}>
+                    <Text style={{ fontSize: 20, fontWeight: '700', color: purple, textAlign: 'center' }}>Delivered Orders</Text>
+                </View>
+
                 <View style={{ width: '10%' }} />
             </View>
-
             {/* Delivered Orders List */}
             <FlatList
                 data={deliveredOrders}

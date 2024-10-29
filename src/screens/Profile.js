@@ -33,7 +33,7 @@ const Profile = () => {
                 </TouchableOpacity>
 
                 <View style={{ width: '80%' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', textAlign: 'center' }}>Profile</Text>
+                    <Text style={{ fontSize: 20, fontWeight: '700', color: purple, textAlign: 'center' }}>Profile</Text>
                 </View>
 
                 <View style={{ width: '10%' }} />
