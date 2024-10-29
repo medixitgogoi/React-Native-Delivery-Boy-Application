@@ -6,6 +6,7 @@ import SplashScreen from './src/auth/SplashScreen';
 import Profile from './src/screens/Profile';
 import Delivery from './src/screens/Delivery';
 import Toast from 'react-native-toast-message';
+import DeliveredOrders from './src/screens/DeliveredOrders';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const App = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Delivery" component={Delivery} />
+          <Stack.Screen name="DeliveredOrders" component={DeliveredOrders} />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast />

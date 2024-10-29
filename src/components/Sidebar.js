@@ -74,6 +74,11 @@ const Sidebar = ({ isOpen, toggleSidebar, closeSidebar, navigation, activeItem }
                             <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Today's Orders</Text>
                         </TouchableOpacity>
 
+                        <TouchableOpacity onPress={() => { closeSidebar(); navigation.navigate('DeliveredOrders'); }} style={itemStyle('DeliveredOrders')}>
+                            <Icon name="today" size={20} color={'#000'} style={{ marginRight: 8 }} />
+                            <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Delivered Orders</Text>
+                        </TouchableOpacity>
+
                         <TouchableOpacity onPress={() => { closeSidebar(); navigation.navigate('Profile'); }} style={itemStyle('Profile')}>
                             <Icon name="person" size={20} color={'#000'} style={{ marginRight: 8 }} />
                             <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Profile</Text>
