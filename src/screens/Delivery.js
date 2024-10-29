@@ -28,7 +28,9 @@ const Delivery = ({ route }) => {
     };
 
     const handleUpiPayment = () => {
-        setUpi(prev => !prev);
+        if (paymentMode !== 2) {
+            setUpi(prev => !prev);
+        }
     };
 
     return (
@@ -95,7 +97,7 @@ const Delivery = ({ route }) => {
                                 setUpi(false);
                             }}
                             style={{
-                                backgroundColor: paymentMode === 1 ? '#4CAF50' : green, // Highlighted color when selected
+                                backgroundColor: paymentMode === 1 ? '#000' : green, // Highlighted color when selected
                                 borderColor: '#18a0a6',
                                 borderWidth: 1,
                                 padding: 10,
@@ -107,9 +109,9 @@ const Delivery = ({ route }) => {
                                 gap: 5
                             }}
                         >
-                            <Icon3 name="money" size={20} color="#000" />
-                            <Text style={{ color: '#000', fontWeight: '600' }}>By Cash</Text>
-                            {paymentMode === 1 && <Icon6 name="checkcircle" size={20} color="#000" />}
+                            <Icon3 name="money" size={20} color={paymentMode === 1 ? '#fff' : '#000'} />
+                            <Text style={{ color: paymentMode === 1 ? '#fff' : '#000', fontWeight: '600' }}>By Cash</Text>
+                            {paymentMode === 1 && <Icon6 name="checkcircle" size={20} color={paymentMode === 1 ? '#fff' : '#000'} />}
                         </TouchableOpacity>
 
                         <TouchableOpacity
@@ -118,7 +120,7 @@ const Delivery = ({ route }) => {
                                 handleUpiPayment()
                             }}
                             style={{
-                                backgroundColor: paymentMode === 2 ? '#8A2BE2' : purple, // Highlighted color when selected
+                                backgroundColor: paymentMode === 2 ? '#000' : purple, // Highlighted color when selected
                                 borderColor: '#18a0a6',
                                 borderWidth: 1,
                                 padding: 10,
