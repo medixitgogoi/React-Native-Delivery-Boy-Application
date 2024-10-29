@@ -11,6 +11,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { purple, green } from '../utils/colors';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import Toast from 'react-native-toast-message';
+import { copyWithStructuralSharing } from '@reduxjs/toolkit/query';
 
 const Delivery = ({ route }) => {
 
@@ -24,7 +26,14 @@ const Delivery = ({ route }) => {
 
     const handleDeliveryConfirmation = () => {
         setIsDelivered(true);
-        Alert.alert('Order Delivered', 'The order has been marked as delivered.');
+        Toast.show({
+            type: 'success',
+            text1: 'Order Delivered',
+            text2: 'The order has been marked as delivered.',
+            position: 'top',
+            topOffset: 10,
+        });
+        console.log('edeeded');
     };
 
     const handleUpiPayment = () => {
@@ -90,7 +99,8 @@ const Delivery = ({ route }) => {
                 <View style={{ marginTop: 30 }}>
                     <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: "#000", marginBottom: 10 }}>Collect Payment</Text>
 
-                    <View style={{ flexDirection: 'row', gap: 15, marginBottom: 30, alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View style={{ flexDirection: 'row', marginBottom: 30, alignItems: 'center', justifyContent: 'space-between' }}>
+                        {/* By Cash */}
                         <TouchableOpacity
                             onPress={() => {
                                 setPaymentMode(1)
@@ -102,7 +112,7 @@ const Delivery = ({ route }) => {
                                 borderWidth: 1,
                                 padding: 10,
                                 borderRadius: 10,
-                                width: '48%',
+                                width: '49%',
                                 alignItems: 'center',
                                 flexDirection: 'row',
                                 justifyContent: 'center',
@@ -114,10 +124,11 @@ const Delivery = ({ route }) => {
                             {paymentMode === 1 && <Icon6 name="checkcircle" size={20} color={paymentMode === 1 ? '#fff' : '#000'} />}
                         </TouchableOpacity>
 
+                        {/* By UPI */}
                         <TouchableOpacity
                             onPress={() => {
-                                setPaymentMode(2)
-                                handleUpiPayment()
+                                setPaymentMode(2);
+                                handleUpiPayment();
                             }}
                             style={{
                                 backgroundColor: paymentMode === 2 ? '#000' : purple, // Highlighted color when selected
@@ -125,7 +136,7 @@ const Delivery = ({ route }) => {
                                 borderWidth: 1,
                                 padding: 10,
                                 borderRadius: 10,
-                                width: '48%',
+                                width: '49%',
                                 alignItems: 'center',
                                 flexDirection: 'row',
                                 justifyContent: 'center',
@@ -151,7 +162,7 @@ const Delivery = ({ route }) => {
             )}
 
             {/* Delivery button */}
-            {paymentMode === null ? (
+            {paymentMode === null && order?.paymentStatus === 'COD' ? (
                 <TouchableOpacity
                     style={{
                         flexDirection: 'row',
@@ -161,14 +172,14 @@ const Delivery = ({ route }) => {
                         position: 'absolute',
                         bottom: 10,
                         width: '100%',
-                        backgroundColor: '#B0B0B0', // Disabled grey color
+                        backgroundColor: '#B0B0B0',
                         padding: 15,
                         borderRadius: 10,
                         marginTop: 20,
                         alignSelf: 'center',
-                        opacity: 0.6 // Reduced opacity for a disabled look
+                        opacity: 0.6,
                     }}
-                    disabled={true} // Disables button interaction
+                    disabled={true}
                 >
                     <Text style={{ color: '#6E6E6E', fontWeight: '500', fontSize: responsiveFontSize(2.2) }}>
                         I have delivered the order
