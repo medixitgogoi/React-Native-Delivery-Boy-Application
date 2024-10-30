@@ -1,10 +1,11 @@
-// Profile.js
 import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { green, purple } from '../utils/colors'; // Import colors if needed
 import Sidebar from '../components/Sidebar';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Octicons'; // Import the icon
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'; // Import the icon
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -44,6 +45,7 @@ const Profile = () => {
             {/* Main Profile Content */}
             <View style={{ flex: 1, paddingHorizontal: 10 }}>
 
+                {/* Profile section */}
                 <View style={{ alignItems: 'center', marginBottom: 20 }}>
                     <View style={{ elevation: 1, width: 90, height: 80 }}>
                         <Image
@@ -55,6 +57,7 @@ const Profile = () => {
                     <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray', }}>deliveryboy@gmail.com</Text>
                 </View>
 
+                {/* Personal Information */}
                 <LinearGradient
                     colors={['#bbf2f5', '#FFFFFF', '#b9f2f5']}
                     start={{ x: 0, y: 0 }}
@@ -74,22 +77,22 @@ const Profile = () => {
 
                 {/* Stats Section */}
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginVertical: 20 }}>
+                    {/* Completed Deliveries */}
                     <View style={cardStyle('#EDF7EC')}>
+                        <Icon name="check-circle" size={24} color="green" style={{ marginBottom: 5 }} />
                         <Text style={cardTextStyle}>20</Text>
-                        <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray', width: '100%' }}>Completed Deliveries</Text>
+                        <Text style={{ fontSize: responsiveFontSize(1.8), color: '#515151', width: '100%', textAlign: 'center', fontWeight: '400' }}>
+                            Completed Deliveries
+                        </Text>
                     </View>
+
                     <View style={cardStyle('#FFE3E4')}>
-                        <Text style={cardTextStyle}>100</Text>
-                        <Text style={{ fontSize: 14, color: 'gray' }}>Pending Deliveries</Text>
+                        <Icon3 name="clock" size={24} color="red" style={{ marginBottom: 5 }} />
+                        <Text style={cardTextStyle}>23</Text>
+                        <Text style={{ fontSize: responsiveFontSize(1.8), color: '#515151', width: '100%', textAlign: 'center', fontWeight: '400' }}>
+                            Pending Deliveries
+                        </Text>
                     </View>
-                    {/* <View style={cardStyle('#EEEFFF')}>
-                        <Text style={cardTextStyle}>50</Text>
-                        <Text style={{ fontSize: 14, color: 'gray' }}>Total Collected</Text>
-                    </View>
-                    <View style={cardStyle('#FFEEE2')}>
-                        <Text style={cardTextStyle}>26</Text>
-                        <Text style={{ fontSize: 14, color: 'gray' }}>Total Earnings</Text>
-                    </View> */}
                 </View>
 
             </View>
@@ -102,7 +105,7 @@ export default Profile;
 const cardStyle = (bgColor) => ({
     backgroundColor: bgColor,
     width: '48%',
-    padding: 20,
+    padding: 15,
     borderRadius: 10,
     marginBottom: 20,
     alignItems: 'center',
@@ -111,7 +114,7 @@ const cardStyle = (bgColor) => ({
 
 const cardTextStyle = {
     fontSize: responsiveFontSize(2),
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 5,
     color: '#000',
 };
