@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen, toggleSidebar, closeSidebar, navigation, activeItem }
                     zIndex: 2,
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    paddingBottom: 20,
+                    paddingBottom: 8,
                 }}
             >
                 <View style={{ flex: 1, paddingVertical: 10 }}>

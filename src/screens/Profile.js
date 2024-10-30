@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { green, purple } from '../utils/colors'; // Import colors if needed
 import Sidebar from '../components/Sidebar';
 import Icon2 from 'react-native-vector-icons/Octicons'; // Import the icon
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Profile = () => {
 
@@ -43,20 +45,32 @@ const Profile = () => {
             <View style={{ flex: 1, paddingHorizontal: 10 }}>
 
                 <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                    <Image
-                        source={{ uri: 'https://via.placeholder.com/100' }}
-                        style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10 }}
-                    />
-                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: purple }}>Delivery Boy</Text>
-                    <Text style={{ fontSize: 16, color: 'gray' }}>deliveryboy@gmail.com</Text>
+                    <View style={{ elevation: 1, width: 90, height: 80 }}>
+                        <Image
+                            source={require('../assets/avatar.png')}
+                            style={{ width: '100%', height: '100%', borderRadius: 40, marginRight: 15 }}
+                        />
+                    </View>
+                    <Text style={{ fontSize: responsiveFontSize(2.2), fontWeight: 'bold', color: purple }}>Delivery Boy</Text>
+                    <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray', }}>deliveryboy@gmail.com</Text>
                 </View>
 
-                <View style={{ backgroundColor: green, padding: 20, borderRadius: 10, elevation: 1 }}>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10, color: '#000' }}>Personal Information</Text>
-                    <Text style={{ fontSize: 16, color: '#000' }}>Name: John Doe</Text>
-                    <Text style={{ fontSize: 16, color: '#000' }}>Phone: +123456789</Text>
-                    <Text style={{ fontSize: 16, color: '#000' }}>Vehicle: Bike</Text>
-                </View>
+                <LinearGradient
+                    colors={['#bbf2f5', '#FFFFFF', '#b9f2f5']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={{
+                        borderRadius: 15,
+                        padding: 20,
+                        flexDirection: 'column',
+                        elevation: 1,
+                    }}
+                >
+                    <Text style={{ fontSize: responsiveFontSize(2.2), fontWeight: 'bold', marginBottom: 10, color: '#000' }}>Personal Information</Text>
+                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000' }}>Name: John Doe</Text>
+                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000' }}>Phone: +123456789</Text>
+                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000' }}>Vehicle: Bike</Text>
+                </LinearGradient>
 
                 {/* Stats Section */}
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginVertical: 20 }}>
