@@ -115,7 +115,7 @@ const DeliveredOrders = () => {
             </View> */}
 
             {/* Delivery Status and Payment Mode */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
                 {/* Delivery Status */}
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                     <Icon6 name="checkcircle" size={18} color="#4CAF50" style={{ marginRight: 3 }} />
