@@ -183,7 +183,11 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 0 }}>
-      <StatusBar animated={true} backgroundColor={'#F4F5FA'} barStyle="dark-content" />
+      <StatusBar
+        animated={true}
+        backgroundColor={'#F4F5FA'}
+        barStyle="dark-content"
+      />
 
       {/* Sidebar Component */}
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} closeSidebar={closeSidebar} navigation={navigation} activeItem="Home" />
