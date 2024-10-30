@@ -103,7 +103,7 @@ const DeliveredOrders = () => {
             {/* Customer Details */}
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
                 <View style={{ width: 25 }}>
-                    <Icon3 name="user" size={18} color="#9f6efe" style={{ marginRight: 5 }} />
+                    <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
                 </View>
                 <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#9f6efe' }}>{item?.customerName}</Text>
             </View>

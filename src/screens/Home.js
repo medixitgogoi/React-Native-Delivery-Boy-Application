@@ -79,7 +79,7 @@ const Home = () => {
       <View style={{
         backgroundColor: '#FFF',
         borderRadius: 15,
-        padding: 15,
+        padding: 20,
         shadowColor: '#000',
         shadowOffset: {
           width: 0,
@@ -92,29 +92,35 @@ const Home = () => {
         {/* Customer Details */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-            <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+            <View style={{ width: 23 }}>
+              <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+            </View>
             <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#9f6efe' }}>{order?.customerName}</Text>
           </View>
         </View>
 
         {/* Location */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-          <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <View style={{ width: 23 }}>
+            <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+          </View>
           <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
         </View>
 
         {/* Order Description */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-          <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <View style={{ width: 23 }}>
+            <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+          </View>
           <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
         </View>
 
         {/* Price and Payment Status */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+          <View style={{ width: 23 }}>
             <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
           </View>
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
         </View>
 
         {/* Accept/Reject Buttons */}
@@ -201,7 +207,7 @@ const Home = () => {
             style={{ width: '100%', height: '100%', borderRadius: 40, marginRight: 15 }}
           />
         </View>
-        
+
         <View>
           <Text style={{ fontSize: responsiveFontSize(2), fontWeight: 'bold', color: '#000' }}>Delivery Boy</Text>
           <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray' }}>deliveryboy@gmail.com</Text>
