@@ -83,61 +83,67 @@ const DeliveredOrders = () => {
             shadowOpacity: 0.2,
             shadowRadius: 5,
             elevation: 1,
+            position: 'relative',
         }}>
+            {/* Delivered Status Badge */}
+            <View style={{
+                position: 'absolute',
+                top: 10,
+                right: 10,
+                backgroundColor: '#4CAF50',
+                paddingVertical: 3,
+                paddingHorizontal: 8,
+                borderRadius: 6,
+            }}>
+                <Text style={{ fontSize: responsiveFontSize(1.5), fontWeight: '500', color: '#FFF' }}>Delivered</Text>
+            </View>
+
             {/* Customer Details */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                    <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#9f6efe' }}>{item?.customerName}</Text>
-                </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+                <Icon3 name="user" size={18} color="#9f6efe" style={{ marginRight: 5 }} />
+                <Text style={{ fontSize: 16, fontWeight: '600', color: '#9f6efe' }}>{item?.customerName}</Text>
             </View>
 
             {/* Location */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-                <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item?.location}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+                <Icon4 name="location-dot" size={16} color="#9d9d9d" style={{ marginRight: 5 }} />
+                <Text style={{ fontSize: 14, color: '#333', fontWeight: '500' }}>{item?.location}</Text>
             </View>
 
             {/* Order Description */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
                 <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item?.orderDescription}</Text>
+                <Text style={{ fontSize: 14, color: '#333', fontWeight: '500' }}>{item?.orderDescription}</Text>
             </View>
 
             {/* Price */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 5 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
                 <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item?.price}</Text>
+                <Text style={{ fontSize: 14, color: '#333', fontWeight: '500' }}>{item?.price}</Text>
             </View>
 
-            {/* <View style={{ height: 0.3, backgroundColor: '#000' }}>
-
-            </View> */}
-
-            {/* Delivery Status and Payment Mode */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-                {/* Delivery Status */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                    <Icon6 name="checkcircle" size={18} color="#4CAF50" style={{ marginRight: 3 }} />
-                    <Text style={{ fontSize: responsiveFontSize(1.8), color: '#4CAF50', fontWeight: '500' }}>Delivered</Text>
-                </View>
-
-                {/* Payment Mode */}
-                <View style={{
-                    paddingVertical: 2,
-                    paddingHorizontal: 6,
-                    borderRadius: 5,
-                    backgroundColor: item.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
-                    borderColor: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
-                    borderWidth: 0.6
+            {/* Payment Mode */}
+            <View style={{
+                alignSelf: 'flex-start',
+                backgroundColor: item.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
+                paddingVertical: 3,
+                paddingHorizontal: 8,
+                borderRadius: 6,
+                borderColor: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+                borderWidth: 0.5,
+                marginTop: 5,
+            }}>
+                <Text style={{
+                    fontSize: responsiveFontSize(1.5),
+                    color: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+                    fontWeight: '500'
                 }}>
-                    <Text style={{ fontSize: responsiveFontSize(1.5), color: '#fff', fontWeight: '500', color: item.paymentStatus === 'COD' ? '#FF6347' : '#1fc9d0', }}>
-                        {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via CASH'}
-                    </Text>
-                </View>
+                    {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via CASH'}
+                </Text>
             </View>
         </View>
     );
+
 
     return (
         <View style={{ flex: 1, backgroundColor: '#F4F5FA', }}>
