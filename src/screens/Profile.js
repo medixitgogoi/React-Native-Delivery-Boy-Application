@@ -69,15 +69,15 @@ const Profile = () => {
                         elevation: 1,
                     }}
                 >
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 3 }}>
                         <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Name:</Text>
                         <Text style={{ fontSize: responsiveFontSize(1.9), color: '#148186', fontWeight: '600' }}>John Doe</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 3 }}>
                         <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Phone:</Text>
                         <Text style={{ fontSize: responsiveFontSize(1.9), color: '#148186', fontWeight: '600' }}>+91 1234567890</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 3 }}>
                         <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Vehicle:</Text>
                         <Text style={{ fontSize: responsiveFontSize(1.9), color: '#148186', fontWeight: '600' }}>Bike</Text>
                     </View>
