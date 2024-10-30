@@ -207,7 +207,8 @@ const Delivery = ({ route }) => {
                         fontSize: responsiveFontSize(1.8),
                         color: '#6E6E6E',
                         textAlign: 'center',
-                        marginTop: 5
+                        marginTop: 5,
+                        fontWeight: '500'
                     }}>
                         The order has been paid via UPI.
                     </Text>
