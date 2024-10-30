@@ -97,20 +97,20 @@ const DeliveredOrders = () => {
             {/* Location */}
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
                 <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item.location}</Text>
+                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item?.location}</Text>
             </View>
 
             {/* Order Description */}
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
                 <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item.orderDescription}</Text>
+                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item?.orderDescription}</Text>
             </View>
 
             {/* Price and Payment Status */}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 6 }}>
                     <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item.price}</Text>
+                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{item?.price}</Text>
                 </View>
             </View>
         </View>
@@ -140,7 +140,7 @@ const DeliveredOrders = () => {
             <FlatList
                 data={ordersData}
                 renderItem={renderOrderItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item?.id}
                 contentContainerStyle={{ paddingVertical: 10, gap: 10, paddingHorizontal: 15 }}
                 ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: 16, color: '#9d9d9d', marginTop: 20 }}>No delivered orders found.</Text>}
             />
