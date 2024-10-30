@@ -69,10 +69,18 @@ const Profile = () => {
                         elevation: 1,
                     }}
                 >
-                    <Text style={{ fontSize: responsiveFontSize(2.2), fontWeight: 'bold', marginBottom: 10, color: '#000' }}>Personal Information</Text>
-                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000' }}>Name: John Doe</Text>
-                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000' }}>Phone: +123456789</Text>
-                    <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000' }}>Vehicle: Bike</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Name:</Text>
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#148186', fontWeight: '600' }}>John Doe</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Phone:</Text>
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#148186', fontWeight: '600' }}>+91 1234567890</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Vehicle:</Text>
+                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#148186', fontWeight: '600' }}>Bike</Text>
+                    </View>
                 </LinearGradient>
 
                 {/* Stats Section */}

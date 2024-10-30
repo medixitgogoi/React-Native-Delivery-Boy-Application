@@ -70,26 +70,26 @@ const Sidebar = ({ isOpen, toggleSidebar, closeSidebar, navigation, activeItem }
                     {/* Sidebar Items */}
                     <View style={{ marginTop: 25, paddingHorizontal: 10 }}>
                         <TouchableOpacity onPress={() => { closeSidebar(); navigation.navigate('Home'); }} style={itemStyle('Home')}>
-                            <Icon name="today" size={20} color={'#000'} style={{ marginRight: 8 }} />
-                            <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Today's Orders</Text>
+                            <Icon name="today" size={19} color={'#000'} style={{ marginRight: 8 }} />
+                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Today's Orders</Text>
                         </TouchableOpacity>
 
                         {/* New Delivered Orders item */}
                         <TouchableOpacity onPress={() => { closeSidebar(); navigation.navigate('DeliveredOrders'); }} style={itemStyle('DeliveredOrders')}>
-                            <Icon name="receipt" size={20} color={'#000'} style={{ marginRight: 8 }} />
-                            <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Delivered Orders</Text>
+                            <Icon name="receipt" size={19} color={'#000'} style={{ marginRight: 8 }} />
+                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Delivered Orders</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => { closeSidebar(); navigation.navigate('Profile'); }} style={itemStyle('Profile')}>
-                            <Icon name="person" size={20} color={'#000'} style={{ marginRight: 8 }} />
-                            <Text style={{ fontSize: responsiveFontSize(2), color: '#000', fontWeight: '500' }}>Profile</Text>
+                            <Icon name="person" size={19} color={'#000'} style={{ marginRight: 8 }} />
+                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Profile</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
                 <TouchableOpacity onPress={closeSidebar} style={{ flexDirection: 'row', paddingVertical: 10, marginVertical: 5, alignItems: 'center', backgroundColor: purple, paddingHorizontal: 8, borderRadius: 10, marginHorizontal: 10 }}>
-                    <Icon3 name="log-out" size={25} color="#fff" style={{ marginRight: 8 }} />
-                    <Text style={{ fontSize: responsiveFontSize(2.2), color: '#fff', fontWeight: '500' }}>Log Out</Text>
+                    <Icon3 name="log-out" size={23} color="#fff" style={{ marginRight: 8 }} />
+                    <Text style={{ fontSize: responsiveFontSize(2), color: '#fff', fontWeight: '500' }}>Log Out</Text>
                 </TouchableOpacity>
             </Animated.View>
 
