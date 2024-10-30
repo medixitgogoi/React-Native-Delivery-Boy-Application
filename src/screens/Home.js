@@ -129,7 +129,7 @@ const Home = () => {
           <TouchableOpacity
             style={{
               backgroundColor: '#6ae4e9',
-              paddingVertical: 10,
+              paddingVertical: 8,
               width: '48%',
               borderRadius: 8,
               alignItems: 'center',
@@ -147,7 +147,7 @@ const Home = () => {
           {/* Reject */}
           <TouchableOpacity style={{
             backgroundColor: '#ef2400',
-            paddingVertical: 10,
+            paddingVertical: 8,
             width: '48%',
             borderRadius: 8,
             alignItems: 'center',
