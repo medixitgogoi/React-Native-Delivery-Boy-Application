@@ -74,22 +74,22 @@ const Profile = () => {
 
                 {/* Stats Section */}
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginVertical: 20 }}>
-                    <View style={cardStyle('#E8F9FD')}>
+                    <View style={cardStyle('#EDF7EC')}>
                         <Text style={cardTextStyle}>20</Text>
-                        <Text style={{ fontSize: 14, color: 'gray' }}>Completed Deliveries</Text>
+                        <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray', width: '100%' }}>Completed Deliveries</Text>
                     </View>
                     <View style={cardStyle('#FFE3E4')}>
                         <Text style={cardTextStyle}>100</Text>
                         <Text style={{ fontSize: 14, color: 'gray' }}>Pending Deliveries</Text>
                     </View>
-                    <View style={cardStyle('#EEEFFF')}>
+                    {/* <View style={cardStyle('#EEEFFF')}>
                         <Text style={cardTextStyle}>50</Text>
                         <Text style={{ fontSize: 14, color: 'gray' }}>Total Collected</Text>
                     </View>
                     <View style={cardStyle('#FFEEE2')}>
                         <Text style={cardTextStyle}>26</Text>
                         <Text style={{ fontSize: 14, color: 'gray' }}>Total Earnings</Text>
-                    </View>
+                    </View> */}
                 </View>
 
             </View>
@@ -110,7 +110,7 @@ const cardStyle = (bgColor) => ({
 });
 
 const cardTextStyle = {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
     marginBottom: 5,
     color: '#000',
