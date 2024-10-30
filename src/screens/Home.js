@@ -188,7 +188,7 @@ const Home = () => {
           <Icon2 name="sidebar-collapse" size={16} color="#000" />
         </TouchableOpacity>
         <View style={{ width: '80%' }}>
-          <Text style={{ fontSize: 20, fontWeight: '700', color: purple, textAlign: 'center' }}>Today's Orders</Text>
+          <Text style={{ fontSize: responsiveFontSize(2.3), fontWeight: '700', color: purple, textAlign: 'center' }}>Today's Orders</Text>
         </View>
         <View style={{ width: '10%' }} />
       </View>
@@ -201,8 +201,9 @@ const Home = () => {
             style={{ width: '100%', height: '100%', borderRadius: 40, marginRight: 15 }}
           />
         </View>
+        
         <View>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>Delivery Boy</Text>
+          <Text style={{ fontSize: responsiveFontSize(2), fontWeight: 'bold', color: '#000' }}>Delivery Boy</Text>
           <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray' }}>deliveryboy@gmail.com</Text>
         </View>
       </View>

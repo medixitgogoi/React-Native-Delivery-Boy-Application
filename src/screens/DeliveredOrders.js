@@ -77,7 +77,7 @@ const DeliveredOrders = () => {
         <View style={{
             backgroundColor: '#FFF',
             borderRadius: 15,
-            padding: 15,
+            padding: 20,
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.2,
@@ -90,64 +90,77 @@ const DeliveredOrders = () => {
                 position: 'absolute',
                 top: 10,
                 right: 10,
-                backgroundColor: '#4CAF50',
+                backgroundColor: '#EDF7EC',
                 paddingVertical: 3,
-                paddingHorizontal: 8,
+                paddingHorizontal: 7,
                 borderRadius: 6,
+                borderColor: '#5EC467',
+                borderWidth: 0.8,
             }}>
-                <Text style={{ fontSize: responsiveFontSize(1.5), fontWeight: '500', color: '#FFF' }}>Delivered</Text>
+                <Text style={{ fontSize: responsiveFontSize(1.5), fontWeight: '500', color: '#286d2e' }}>Delivered</Text>
             </View>
 
             {/* Customer Details */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                <Icon3 name="user" size={18} color="#9f6efe" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: 16, fontWeight: '600', color: '#9f6efe' }}>{item?.customerName}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                <View style={{ width: 25 }}>
+                    <Icon3 name="user" size={18} color="#9f6efe" style={{ marginRight: 5 }} />
+                </View>
+                <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#9f6efe' }}>{item?.customerName}</Text>
             </View>
 
             {/* Location */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                <Icon4 name="location-dot" size={16} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: 14, color: '#333', fontWeight: '500' }}>{item?.location}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                <View style={{ width: 25 }}>
+                    <Icon4 name="location-dot" size={16} color="#9d9d9d" style={{ marginRight: 5 }} />
+                </View>
+                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#333', fontWeight: '500' }}>{item?.location}</Text>
             </View>
 
             {/* Order Description */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: 14, color: '#333', fontWeight: '500' }}>{item?.orderDescription}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                <View style={{ width: 25 }}>
+                    <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+                </View>
+                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#333', fontWeight: '500' }}>{item?.orderDescription}</Text>
             </View>
 
             {/* Price */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                <Text style={{ fontSize: 14, color: '#333', fontWeight: '500' }}>{item?.price}</Text>
-            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                <View style={{ width: 25 }}>
+                    <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+                </View>
+                <Text style={{ fontSize: responsiveFontSize(1.9), color: '#333', fontWeight: '500' }}>{item?.price}</Text>
 
-            {/* Payment Mode */}
-            <View style={{
-                alignSelf: 'flex-start',
-                backgroundColor: item.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
-                paddingVertical: 3,
-                paddingHorizontal: 8,
-                borderRadius: 6,
-                borderColor: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
-                borderWidth: 0.5,
-                marginTop: 5,
-            }}>
-                <Text style={{
-                    fontSize: responsiveFontSize(1.5),
-                    color: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
-                    fontWeight: '500'
+                {/* Payment Mode */}
+                <View style={{
+                    alignSelf: 'flex-start',
+                    backgroundColor: item.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
+                    paddingVertical: 3,
+                    paddingHorizontal: 6,
+                    borderRadius: 5,
+                    borderColor: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+                    borderWidth: 0.5,
+                    marginLeft: 6,
                 }}>
-                    {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via CASH'}
-                </Text>
+                    <Text style={{
+                        fontSize: responsiveFontSize(1.4),
+                        color: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+                        fontWeight: '500'
+                    }}>
+                        {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via CASH'}
+                    </Text>
+                </View>
             </View>
         </View>
     );
 
-
     return (
         <View style={{ flex: 1, backgroundColor: '#F4F5FA', }}>
-            <StatusBar animated={true} backgroundColor={'#F4F5FA'} barStyle="dark-content" />
+            <StatusBar
+                animated={true}
+                backgroundColor={'#F4F5FA'}
+                barStyle="dark-content"
+            />
 
             {/* Sidebar Component */}
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} closeSidebar={closeSidebar} navigation={navigation} activeItem="DeliveredOrders" />
@@ -159,7 +172,7 @@ const DeliveredOrders = () => {
                 </TouchableOpacity>
 
                 <View style={{ width: '80%' }}>
-                    <Text style={{ fontSize: 20, fontWeight: '700', color: purple, textAlign: 'center' }}>Delivered Orders</Text>
+                    <Text style={{ fontSize: responsiveFontSize(2.3), fontWeight: '700', color: purple, textAlign: 'center' }}>Delivered Orders</Text>
                 </View>
 
                 <View style={{ width: '10%' }} />
