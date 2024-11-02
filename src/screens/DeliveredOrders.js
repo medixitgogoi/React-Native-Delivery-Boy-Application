@@ -215,28 +215,68 @@ const DeliveredOrders = () => {
                 />
             )}
 
-            {/* Your task */}
+            {/* Sub header */}
             <View style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingHorizontal: 15,
-                marginBottom: 10,
+                paddingHorizontal: 12,
+                paddingVertical: 10,
+                backgroundColor: '#fff', // Light grey background for distinction
+                borderRadius: 8,
+                marginHorizontal: 15,
+                marginBottom: 15,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 3,
+                elevation: 1,
             }}>
                 {/* Total Cash Collection */}
-                {totalCashCollection > 0 && (
-                    <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '600', color: '#333' }}>
-                        Total Cash Collection: ₹{totalCashCollection.toFixed(2)}
+                <View style={{
+                    // paddingVertical: 6,
+                    // paddingHorizontal: 12,
+                    // borderRadius: 5,
+                    // borderColor: '#ff8c42', // Soft orange border for emphasis
+                    // borderWidth: 1,
+                    // flex: 1,
+                    // marginRight: 5,
+                    // alignItems: 'center'
+                }}>
+                    <Text style={{
+                        fontSize: responsiveFontSize(1.7),
+                        fontWeight: '600',
+                        color: '#333'
+                    }}>
+                        Total Cash Collection: ₹{totalCashCollection?.toFixed(2)}
                     </Text>
-                )}
+                </View>
 
                 {/* Selected Date */}
                 {selectedDate && selectedDate !== new Date() && (
-                    <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '600', color: '#333' }}>
-                        {selectedDate.toLocaleDateString()}
-                    </Text>
+                    <View style={{
+                        backgroundColor: green,
+                        paddingVertical: 5,
+                        paddingHorizontal: 12,
+                        borderRadius: 5,
+                        // borderColor: '#6b46c1', // Soft purple border for date display
+                        // borderWidth: 1,
+                        // flex: 1,
+                        // marginLeft: 5,
+                        // alignItems: 'center',
+                        elevation: 1
+                    }}>
+                        <Text style={{
+                            fontSize: responsiveFontSize(1.6),
+                            fontWeight: '600',
+                            color: '#333'
+                        }}>
+                            {selectedDate.toLocaleDateString()}
+                        </Text>
+                    </View>
                 )}
             </View>
+
 
             {/* Delivered Orders List */}
             <FlatList
