@@ -6,7 +6,6 @@ import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import { green, purple } from '../utils/colors';
-import { BlurView } from '@react-native-community/blur';
 import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {

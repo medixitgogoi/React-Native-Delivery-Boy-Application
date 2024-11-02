@@ -86,12 +86,12 @@ const Profile = () => {
 
                 <ScrollView style={{ flex: 1, paddingHorizontal: 15 }}>
                     {/* Stats Section */}
-                    <View style={{ marginBottom: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                    <View style={{ marginTop: 25, flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                         <Icon4 name="bar-chart" size={22} color="#148186" />
                         <Text style={{ color: '#000', fontWeight: '600' }}>My Stats</Text>
                     </View>
 
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', }}>
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
                         {/* Completed Deliveries */}
                         <View style={cardStyle('#EDF7EC')}>
                             <Icon name="check-circle" size={22} color="green" style={{ marginBottom: 5 }} />
@@ -112,8 +112,8 @@ const Profile = () => {
                     </View>
 
                     {/* Payment Collection Section */}
-                    <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                        <Icon4 name="bar-chart" size={22} color="#148186" />
+                    <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 15 }}>
+                        <Icon name="money" size={16} color="#148186" />
                         <Text style={{ color: '#000', fontWeight: '600' }}>My Payment Collection</Text>
                     </View>
 
