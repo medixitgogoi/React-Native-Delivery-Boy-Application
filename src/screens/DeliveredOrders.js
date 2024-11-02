@@ -23,6 +23,8 @@ const DeliveredOrders = () => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [deliveredOrders, setDeliveredOrders] = useState([]);
 
+    // console.log('selectedDate', selectedDate.toLocaleDateString());
+
     // useFocusEffect and useCallback
     useFocusEffect(
         useCallback(() => {
@@ -45,7 +47,7 @@ const DeliveredOrders = () => {
     const renderOrderItem = ({ item }) => (
         <View style={{
             backgroundColor: '#FFF',
-            borderRadius: 15,
+            borderRadius: 12,
             paddingHorizontal: 20,
             paddingVertical: 15,
             shadowColor: '#000',
@@ -221,11 +223,11 @@ const DeliveredOrders = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingHorizontal: 12,
-                paddingVertical: 10,
-                backgroundColor: '#fff', // Light grey background for distinction
+                paddingVertical: 8,
+                backgroundColor: '#fff',
                 borderRadius: 8,
                 marginHorizontal: 15,
-                marginBottom: 15,
+                marginBottom: 10,
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,
@@ -234,13 +236,6 @@ const DeliveredOrders = () => {
             }}>
                 {/* Total Cash Collection */}
                 <View style={{
-                    // paddingVertical: 6,
-                    // paddingHorizontal: 12,
-                    // borderRadius: 5,
-                    // borderColor: '#ff8c42', // Soft orange border for emphasis
-                    // borderWidth: 1,
-                    // flex: 1,
-                    // marginRight: 5,
                     alignItems: 'center',
                     flexDirection: 'row',
                     gap: 3
@@ -263,6 +258,12 @@ const DeliveredOrders = () => {
                     </View>
                 </View>
 
+                <Text style={{
+                    fontSize: responsiveFontSize(1.8),
+                    fontWeight: '500',
+                    color: '#000',
+                }}>on</Text>
+
                 {/* Selected Date */}
                 {selectedDate && selectedDate !== new Date() && (
                     <View style={{
@@ -270,11 +271,6 @@ const DeliveredOrders = () => {
                         paddingVertical: 4,
                         paddingHorizontal: 10,
                         borderRadius: 5,
-                        // borderColor: '#6b46c1', // Soft purple border for date display
-                        // borderWidth: 1,
-                        // flex: 1,
-                        // marginLeft: 5,
-                        // alignItems: 'center',
                         elevation: 1
                     }}>
                         <Text style={{
@@ -282,20 +278,19 @@ const DeliveredOrders = () => {
                             fontWeight: '600',
                             color: '#fff'
                         }}>
-                            {selectedDate.toLocaleDateString()}
+                            {selectedDate ? selectedDate.toLocaleDateString() : 'All Orders'}
                         </Text>
                     </View>
                 )}
             </View>
-
 
             {/* Delivered Orders List */}
             <FlatList
                 data={filteredOrders}
                 renderItem={renderOrderItem}
                 keyExtractor={(item) => item.id}
-                contentContainerStyle={{ paddingVertical: 10, gap: 10, paddingHorizontal: 15 }}
-                ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: 16, color: '#9d9d9d', marginTop: 20 }}>No delivered orders found.</Text>}
+                contentContainerStyle={{ gap: 10, paddingHorizontal: 15 }}
+                ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: responsiveFontSize(1.8), color: '#737373', marginTop: 20 }}>No delivered orders found on {selectedDate.toLocaleDateString()}.</Text>}
             />
         </View>
     );
