@@ -104,20 +104,20 @@ const DeliveredOrders = () => {
                 {/* Payment Mode */}
                 <View style={{
                     alignSelf: 'flex-start',
-                    backgroundColor: item.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
+                    backgroundColor: item.paymentStatus.method === 'COD' ? '#FFE8E6' : '#E6FAFB',
                     paddingVertical: 3,
                     paddingHorizontal: 6,
                     borderRadius: 5,
-                    borderColor: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+                    borderColor: item.paymentStatus.method === 'COD' ? '#ff7468' : '#1eb6bd',
                     borderWidth: 0.5,
                     marginLeft: 6,
                 }}>
                     <Text style={{
                         fontSize: responsiveFontSize(1.4),
-                        color: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
+                        color: item.paymentStatus.method === 'COD' ? '#ff7468' : '#1eb6bd',
                         fontWeight: '500'
                     }}>
-                        {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via COD'}
+                        {item?.paymentStatus.method === 'UPI' ? 'Paid via UPI' : 'Paid via COD'}
                     </Text>
                 </View>
             </View>
@@ -141,6 +141,14 @@ const DeliveredOrders = () => {
             setFilteredOrders(filtered);
         }
     };
+
+    // totalCashCollection
+    const totalCashCollection = filteredOrders.reduce((sum, order) => {
+        if (order.paymentStatus.method === 'COD' && order.paymentStatus.details.paidVia === 'Cash') {
+            return sum + parseFloat(order.paymentStatus.details.amount.replace('₹', ''));
+        }
+        return sum;
+    }, 0);
 
     return (
         <View style={{ flex: 1, backgroundColor: '#F4F5FA', }}>
@@ -207,12 +215,27 @@ const DeliveredOrders = () => {
                 />
             )}
 
-            {/* Date showing */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, gap: 5, marginBottom: 10 }}>
-                <Text style={{ color: '#000', fontWeight: '500' }}>Your delivered orders on:</Text>
-                <View style={{ backgroundColor: purple, padding: 5, borderRadius: 6 }}>
-                    <Text style={{ color: '#fff', fontSize: responsiveFontSize(1.4), fontWeight: '600' }}>{selectedDate.toLocaleDateString()}</Text>
-                </View>
+            {/* Your task */}
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingHorizontal: 15,
+                marginBottom: 10,
+            }}>
+                {/* Total Cash Collection */}
+                {totalCashCollection > 0 && (
+                    <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '600', color: '#333' }}>
+                        Total Cash Collection: ₹{totalCashCollection.toFixed(2)}
+                    </Text>
+                )}
+
+                {/* Selected Date */}
+                {selectedDate && selectedDate !== new Date() && (
+                    <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '600', color: '#333' }}>
+                        {selectedDate.toLocaleDateString()}
+                    </Text>
+                )}
             </View>
 
             {/* Delivered Orders List */}
