@@ -1,6 +1,6 @@
 import { View, Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useNavigation, validatePathConfig } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
 import Icon2 from 'react-native-vector-icons/Octicons';
 import { green, purple } from '../utils/colors';
@@ -11,218 +11,21 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import Icon4 from 'react-native-vector-icons/FontAwesome6';
 import Icon6 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/Entypo';
-
-const ordersData = [
-    {
-        id: '1',
-        customerName: 'Nick Adams',
-        location: '123 Main St, Springfield',
-        orderDescription: 'Apples, Orange Juice',
-        deliveryTime: '2:00 PM',
-        price: '₹15.00',
-        paymentStatus: 'COD',
-        deliveryDate: '01/11/2024',
-    },
-    {
-        id: '2',
-        customerName: 'Anthony Adverse',
-        location: '456 Elm St, Springfield',
-        orderDescription: 'Bread, Milk',
-        deliveryTime: '3:30 PM',
-        price: '₹12.50',
-        paymentStatus: 'UPI',
-        deliveryDate: '01/11/2024',
-    },
-    {
-        id: '3',
-        customerName: 'Sarah Johnson',
-        location: '789 Maple St, Springfield',
-        orderDescription: 'Eggs, Flour, Sugar',
-        deliveryTime: '4:00 PM',
-        price: '₹20.00',
-        paymentStatus: 'COD',
-        deliveryDate: '01/11/2024',
-    },
-    {
-        id: '4',
-        customerName: 'Michael Brown',
-        location: '101 Oak St, Springfield',
-        orderDescription: 'Chicken, Rice, Vegetables',
-        deliveryTime: '5:15 PM',
-        price: '₹30.75',
-        paymentStatus: 'UPI',
-        deliveryDate: '02/11/2024',
-    },
-    {
-        id: '5',
-        customerName: 'Emily White',
-        location: '202 Pine St, Springfield',
-        orderDescription: 'Pasta, Tomato Sauce',
-        deliveryTime: '6:45 PM',
-        price: '₹18.50',
-        paymentStatus: 'COD',
-        deliveryDate: '02/11/2024',
-    },
-    {
-        id: '6',
-        customerName: 'Jessica Smith',
-        location: '303 Cedar St, Springfield',
-        orderDescription: 'Rice, Lentils',
-        deliveryTime: '7:30 PM',
-        price: '₹22.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '02/11/2024',
-    },
-    {
-        id: '7',
-        customerName: 'Robert Johnson',
-        location: '404 Birch St, Springfield',
-        orderDescription: 'Beef, Broccoli',
-        deliveryTime: '8:00 PM',
-        price: '₹35.00',
-        paymentStatus: 'COD',
-        deliveryDate: '03/11/2024',
-    },
-    {
-        id: '8',
-        customerName: 'Linda Davis',
-        location: '505 Spruce St, Springfield',
-        orderDescription: 'Fish, Chips',
-        deliveryTime: '9:15 PM',
-        price: '₹40.50',
-        paymentStatus: 'UPI',
-        deliveryDate: '03/11/2024',
-    },
-    {
-        id: '9',
-        customerName: 'Charles Miller',
-        location: '606 Ash St, Springfield',
-        orderDescription: 'Tacos, Salsa',
-        deliveryTime: '10:00 PM',
-        price: '₹28.75',
-        paymentStatus: 'COD',
-        deliveryDate: '03/11/2024',
-    },
-    {
-        id: '10',
-        customerName: 'Laura Garcia',
-        location: '707 Walnut St, Springfield',
-        orderDescription: 'Salad, Dressing',
-        deliveryTime: '11:30 AM',
-        price: '₹10.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '04/11/2024',
-    },
-    {
-        id: '11',
-        customerName: 'James Wilson',
-        location: '808 Cherry St, Springfield',
-        orderDescription: 'Cookies, Milk',
-        deliveryTime: '12:15 PM',
-        price: '₹5.50',
-        paymentStatus: 'COD',
-        deliveryDate: '04/11/2024',
-    },
-    {
-        id: '12',
-        customerName: 'Patricia Martinez',
-        location: '909 Peach St, Springfield',
-        orderDescription: 'Chocolate Cake',
-        deliveryTime: '1:00 PM',
-        price: '₹35.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '05/11/2024',
-    },
-    {
-        id: '13',
-        customerName: 'Michael Thompson',
-        location: '1010 Lemon St, Springfield',
-        orderDescription: 'Pizza, Garlic Bread',
-        deliveryTime: '2:30 PM',
-        price: '45.00',
-        paymentStatus: 'COD',
-        deliveryDate: '05/11/2024',
-    },
-    {
-        id: '14',
-        customerName: 'Jennifer White',
-        location: '1111 Apricot St, Springfield',
-        orderDescription: 'Sushi, Soy Sauce',
-        deliveryTime: '3:45 PM',
-        price: '₹50.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '06/11/2024',
-    },
-    {
-        id: '15',
-        customerName: 'William Harris',
-        location: '1212 Plum St, Springfield',
-        orderDescription: 'Burger, Fries',
-        deliveryTime: '5:00 PM',
-        price: '₹25.00',
-        paymentStatus: 'COD',
-        deliveryDate: '06/11/2024',
-    },
-    {
-        id: '16',
-        customerName: 'Susan Clark',
-        location: '1313 Fig St, Springfield',
-        orderDescription: 'Spaghetti, Meatballs',
-        deliveryTime: '6:30 PM',
-        price: '₹30.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '07/11/2024',
-    },
-    {
-        id: '17',
-        customerName: 'David Lewis',
-        location: '1414 Date St, Springfield',
-        orderDescription: 'Chicken Wings',
-        deliveryTime: '7:45 PM',
-        price: '₹22.50',
-        paymentStatus: 'COD',
-        deliveryDate: '08/11/2024',
-    },
-    {
-        id: '18',
-        customerName: 'Barbara Young',
-        location: '1515 Kiwi St, Springfield',
-        orderDescription: 'Pancakes, Syrup',
-        deliveryTime: '8:30 AM',
-        price: '₹15.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '08/11/2024',
-    },
-    {
-        id: '19',
-        customerName: 'Joseph Walker',
-        location: '1616 Coconut St, Springfield',
-        orderDescription: 'Steak, Potatoes',
-        deliveryTime: '9:30 PM',
-        price: '₹75.00',
-        paymentStatus: 'COD',
-        deliveryDate: '09/11/2024',
-    },
-    {
-        id: '20',
-        customerName: 'Margaret Hall',
-        location: '1717 Olive St, Springfield',
-        orderDescription: 'Vegetable Stir Fry',
-        deliveryTime: '10:30 AM',
-        price: '₹20.00',
-        paymentStatus: 'UPI',
-        deliveryDate: '10/11/2024',
-    },
-];
+import { orders } from '../utils/data';
 
 const DeliveredOrders = () => {
 
     const navigation = useNavigation();
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [filteredOrders, setFilteredOrders] = useState(ordersData);
+    const [filteredOrders, setFilteredOrders] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
+    const [deliveredOrders, setDeliveredOrders] = useState([]);
+
+    useEffect(() => {
+        setDeliveredOrders(orders);
+    }, [])
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -316,26 +119,19 @@ const DeliveredOrders = () => {
     const onDateChange = (event, date) => {
         setShowDatePicker(false);
         if (date) {
-            // Update the selected date state
             setSelectedDate(date);
 
-            // Set the time to midnight for comparison
-            const selectedDat = selectedDate.toLocaleDateString(); // Format the date correctly
+            // Format the new date to match the deliveryDate format in ordersData
+            const selectedDat = date.toLocaleDateString();
 
-            console.log('selectedDate: ', selectedDat);
-
-            // Filter orders based on the selected date
-            const filtered = ordersData.filter(order => {
-                // Convert the order's deliveryDate to a Date object and then to a string
-                // const orderDate = new Date(order.deliveryDate).setHours(0, 0, 0, 0);
-                return order.deliveryDate === selectedDat; // Compare the two midnight times
+            // Filter orders based on the new selected date
+            const filtered = deliveredOrders.filter(order => {
+                return order.deliveryDate === selectedDat;
             });
 
             setFilteredOrders(filtered);
-            console.log('filtered', filtered);
         }
     };
-
 
     return (
         <View style={{ flex: 1, backgroundColor: '#F4F5FA', }}>
@@ -378,10 +174,10 @@ const DeliveredOrders = () => {
                     onPress={() => setShowDatePicker(true)}
                     style={{
                         alignItems: 'center',
-                        paddingVertical: 6,
-                        paddingHorizontal: 12,
+                        paddingVertical: 5,
+                        paddingHorizontal: 8,
                         backgroundColor: '#e0e7ff',  // Light purple background
-                        borderRadius: 10,
+                        borderRadius: 7,
                         borderColor: '#6b46c1',  // Darker purple border
                         borderWidth: 1,
                     }}
@@ -402,7 +198,8 @@ const DeliveredOrders = () => {
                 />
             )}
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, gap: 5 }}>
+            {/* Date showing */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, gap: 5, marginBottom: 10 }}>
                 <Text style={{ color: '#000', fontWeight: '500' }}>Your delivered orders on:</Text>
                 <View style={{ backgroundColor: purple, padding: 5, borderRadius: 6 }}>
                     <Text style={{ color: '#fff', fontSize: responsiveFontSize(1.4), fontWeight: '600' }}>{selectedDate.toLocaleDateString()}</Text>
