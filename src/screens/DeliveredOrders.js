@@ -241,23 +241,34 @@ const DeliveredOrders = () => {
                     // borderWidth: 1,
                     // flex: 1,
                     // marginRight: 5,
-                    // alignItems: 'center'
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    gap: 3
                 }}>
                     <Text style={{
                         fontSize: responsiveFontSize(1.7),
                         fontWeight: '600',
                         color: '#333'
                     }}>
-                        Total Cash Collection: ₹{totalCashCollection?.toFixed(2)}
+                        Total Cash Collection:
                     </Text>
+                    <View style={{ backgroundColor: '#000', paddingHorizontal: 5, borderRadius: 4, paddingVertical: 2 }}>
+                        <Text
+                            style={{
+                                fontSize: responsiveFontSize(1.6),
+                                fontWeight: '600',
+                                color: '#fff'
+                            }}
+                        >₹{totalCashCollection?.toFixed(2)}</Text>
+                    </View>
                 </View>
 
                 {/* Selected Date */}
                 {selectedDate && selectedDate !== new Date() && (
                     <View style={{
-                        backgroundColor: green,
-                        paddingVertical: 5,
-                        paddingHorizontal: 12,
+                        backgroundColor: '#000',
+                        paddingVertical: 4,
+                        paddingHorizontal: 10,
                         borderRadius: 5,
                         // borderColor: '#6b46c1', // Soft purple border for date display
                         // borderWidth: 1,
@@ -269,7 +280,7 @@ const DeliveredOrders = () => {
                         <Text style={{
                             fontSize: responsiveFontSize(1.6),
                             fontWeight: '600',
-                            color: '#333'
+                            color: '#fff'
                         }}>
                             {selectedDate.toLocaleDateString()}
                         </Text>

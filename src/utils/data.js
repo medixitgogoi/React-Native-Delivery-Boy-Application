@@ -199,7 +199,7 @@ export const orders = [
         paymentStatus: {
             method: 'COD',
             details: {
-                paidVia: 'Cash',
+                paidVia: 'UPI',
                 amount: '₹7.00',
             }
         },
