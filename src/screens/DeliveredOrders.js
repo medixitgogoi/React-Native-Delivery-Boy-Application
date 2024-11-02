@@ -1,6 +1,6 @@
 import { View, Text, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
 import Icon2 from 'react-native-vector-icons/Octicons';
 import { green, purple } from '../utils/colors';
@@ -23,9 +23,11 @@ const DeliveredOrders = () => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [deliveredOrders, setDeliveredOrders] = useState([]);
 
-    useEffect(() => {
-        setDeliveredOrders(orders);
-    }, [])
+    useFocusEffect(
+        useCallback(() => {
+            setDeliveredOrders(orders);
+        }, [])
+    );
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
