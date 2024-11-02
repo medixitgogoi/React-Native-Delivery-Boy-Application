@@ -46,7 +46,8 @@ const DeliveredOrders = () => {
         <View style={{
             backgroundColor: '#FFF',
             borderRadius: 15,
-            padding: 20,
+            paddingHorizontal: 20,
+            paddingVertical: 15,
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.2,
@@ -57,7 +58,7 @@ const DeliveredOrders = () => {
             {/* Delivered Status Badge */}
             <View style={{
                 position: 'absolute',
-                top: 10,
+                top: 12,
                 right: 10,
                 backgroundColor: '#EDF7EC',
                 paddingVertical: 3,
@@ -116,7 +117,7 @@ const DeliveredOrders = () => {
                         color: item.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
                         fontWeight: '500'
                     }}>
-                        {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via CASH'}
+                        {item?.paymentStatus === 'UPI' ? 'Paid via UPI' : 'Paid via COD'}
                     </Text>
                 </View>
             </View>
