@@ -23,20 +23,25 @@ const DeliveredOrders = () => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [deliveredOrders, setDeliveredOrders] = useState([]);
 
+    // useFocusEffect and useCallback
     useFocusEffect(
         useCallback(() => {
             setDeliveredOrders(orders);
+            setFilteredOrders(orders);
         }, [])
     );
 
+    // toggleSidebar
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
+    // closeSidebar
     const closeSidebar = () => {
         setIsSidebarOpen(false);
     };
 
+    // renderOrderItem
     const renderOrderItem = ({ item }) => (
         <View style={{
             backgroundColor: '#FFF',
@@ -118,6 +123,7 @@ const DeliveredOrders = () => {
         </View>
     );
 
+    // onDateChange function
     const onDateChange = (event, date) => {
         setShowDatePicker(false);
         if (date) {
@@ -127,7 +133,7 @@ const DeliveredOrders = () => {
             const selectedDat = date.toLocaleDateString();
 
             // Filter orders based on the new selected date
-            const filtered = deliveredOrders.filter(order => {
+            const filtered = deliveredOrders?.filter(order => {
                 return order.deliveryDate === selectedDat;
             });
 
