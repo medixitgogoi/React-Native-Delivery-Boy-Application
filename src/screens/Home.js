@@ -73,7 +73,7 @@ const Home = () => {
           <View style={{ width: 23 }}>
             <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
         </View>
 
         {/* Delivery Date */}
