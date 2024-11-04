@@ -80,8 +80,23 @@ const Delivery = ({ route }) => {
                     {/* Order Description */}
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
                         <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
+                        <View>
+                            {order.orderDescription.map((item, index) => (
+                                <Text
+                                    key={index}
+                                    style={{
+                                        fontSize: responsiveFontSize(1.9),
+                                        color: '#000',
+                                        fontWeight: '500',
+                                        marginBottom: 3,
+                                    }}
+                                >
+                                    {item.product} (x{item.quantity})
+                                </Text>
+                            ))}
+                        </View>
                     </View>
+
 
                     {/* Price and Payment Status */}
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -118,7 +133,7 @@ const Delivery = ({ route }) => {
                                 setUpi(false);
                             }}
                             style={{
-                                backgroundColor: paymentMode === 1 ? '#333' : green,
+                                backgroundColor: paymentMode === 1 ? '#000' : green,
                                 borderColor: '#18a0a6',
                                 borderWidth: 1,
                                 paddingVertical: 12,
@@ -133,7 +148,6 @@ const Delivery = ({ route }) => {
                                 shadowOffset: { width: 0, height: 2 },
                                 shadowOpacity: 0.2,
                                 shadowRadius: 3,
-                                elevation: 2
                             }}
                         >
                             <Icon3 name="money" size={20} color={paymentMode === 1 ? '#fff' : '#333'} />
@@ -154,7 +168,7 @@ const Delivery = ({ route }) => {
                                 handleUpiPayment();
                             }}
                             style={{
-                                backgroundColor: paymentMode === 2 ? '#333' : purple,
+                                backgroundColor: paymentMode === 2 ? '#000' : purple,
                                 borderColor: '#18a0a6',
                                 borderWidth: 1,
                                 paddingVertical: 12,
@@ -169,7 +183,6 @@ const Delivery = ({ route }) => {
                                 shadowOffset: { width: 0, height: 2 },
                                 shadowOpacity: 0.2,
                                 shadowRadius: 3,
-                                elevation: 2
                             }}
                         >
                             <Icon2 name="credit-card" size={20} color="#fff" />
