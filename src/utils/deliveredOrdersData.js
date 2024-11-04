@@ -1,4 +1,4 @@
-export const orders = [
+export const deliveredOrdersData = [
     {
         id: '1',
         customerName: 'Nick Adams',
