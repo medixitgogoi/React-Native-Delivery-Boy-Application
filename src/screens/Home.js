@@ -61,7 +61,7 @@ const Home = () => {
         </View>
 
         {/* Order Description */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23 }}>
             <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>

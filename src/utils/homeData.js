@@ -24,6 +24,8 @@ export const orders = [
             { product: 'Tomato Sauce', quantity: 2 },
             { product: 'Basil', quantity: 1 },
             { product: 'Olive Oil', quantity: 1 },
+            { product: 'Basil', quantity: 1 },
+            { product: 'Olive Oil', quantity: 1 },
             { product: 'Parmesan', quantity: 1 },
         ],
         deliveryTime: '2:30 PM',

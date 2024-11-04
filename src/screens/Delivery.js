@@ -66,32 +66,53 @@ const Delivery = ({ route }) => {
                     {/* Customer Details */}
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                            <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
+                            <Icon3 name="user" size={17} color="#9d9d9d" style={{ marginRight: 5 }} />
+                            <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '700', color: '#9f6efe' }}>{order.customerName}</Text>
                         </View>
                     </View>
 
                     {/* Location */}
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 12 }}>
-                        <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
-                        <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
+                        <Icon4 name="location-dot" size={17} color="#9d9d9d" style={{ marginRight: 5 }} />
+                        <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>{order.location}</Text>
                     </View>
 
                     {/* Order Description */}
                     <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 3, marginBottom: 12 }}>
-                        <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                        <View>
+                        <Icon5 name="box" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
+                        <View style={{gap: 2}}>
                             {order.orderDescription.map((item, index) => (
-                                <Text
-                                    key={index}
-                                    style={{
-                                        fontSize: responsiveFontSize(1.9),
-                                        color: '#000',
-                                        fontWeight: '500',
-                                    }}
-                                >
-                                    {item.product} (x{item.quantity})
-                                </Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} key={index}>
+                                    <Text
+                                        style={{
+                                            fontSize: responsiveFontSize(1.8),
+                                            color: '#000',
+                                            fontWeight: '500',
+                                        }}
+                                    >
+                                        {item.product}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            fontSize: responsiveFontSize(1.6),
+                                            color: '#000',
+                                            fontWeight: '500',
+                                        }}
+                                    >
+                                        x
+                                    </Text>
+                                    <View style={{ backgroundColor: '#000', borderRadius: 4, paddingHorizontal: 4, paddingVertical: 1 }}>
+                                        <Text
+                                            style={{
+                                                fontSize: responsiveFontSize(1.5),
+                                                color: '#fff',
+                                                fontWeight: '500',
+                                            }}
+                                        >
+                                            {item.quantity}
+                                        </Text>
+                                    </View>
+                                </View>
                             ))}
                         </View>
                     </View>
@@ -100,8 +121,8 @@ const Delivery = ({ route }) => {
                     {/* Price and Payment Status */}
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                            <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
-                            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
+                            <Icon4 name="money-bill" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
                         </View>
                     </View>
                 </LinearGradient>
