@@ -65,7 +65,9 @@ const Home = () => {
           <View style={{ width: 23 }}>
             <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>
+            {order.orderDescription.map(item => item.product).join(', ')}
+          </Text>
         </View>
 
         {/* Price */}
