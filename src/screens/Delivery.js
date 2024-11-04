@@ -79,8 +79,8 @@ const Delivery = ({ route }) => {
 
                     {/* Order Description */}
                     <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 3, marginBottom: 12 }}>
-                        <Icon5 name="box" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
-                        <View style={{gap: 2}}>
+                        <Icon5 name="box" size={14} color="#9d9d9d" style={{ marginRight: 5, marginTop: 1 }} />
+                        <View style={{ gap: 2 }}>
                             {order.orderDescription.map((item, index) => (
                                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} key={index}>
                                     <Text
