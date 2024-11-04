@@ -8,7 +8,7 @@ export const orders = [
         price: '₹49.33',
         paymentStatus: 'COD',
         deliveryDate: '02/11/2024',
-        status: 'delivered',
+        status: 'Delivered',
     },
     {
         id: '2',
@@ -19,7 +19,7 @@ export const orders = [
         price: '₹40.98',
         paymentStatus: 'UPI',
         deliveryDate: '02/11/2024',
-        status: 'pending',
+        status: 'Pending',
     },
     {
         id: '3',
@@ -30,7 +30,7 @@ export const orders = [
         price: '₹20.77',
         paymentStatus: 'UPI',
         deliveryDate: '02/11/2024',
-        status: 'delivered',
+        status: 'Delivered',
     },
     {
         id: '4',
@@ -41,7 +41,7 @@ export const orders = [
         price: '₹36.29',
         paymentStatus: 'COD',
         deliveryDate: '02/11/2024',
-        status: 'pending',
+        status: 'Pending',
     },
     {
         id: '5',
@@ -52,7 +52,7 @@ export const orders = [
         price: '₹12.74',
         paymentStatus: 'UPI',
         deliveryDate: '02/11/2024',
-        status: 'delivered',
+        status: 'Delivered',
     },
     {
         id: '6',
@@ -63,7 +63,7 @@ export const orders = [
         price: '₹23.62',
         paymentStatus: 'UPI',
         deliveryDate: '02/11/2024',
-        status: 'pending',
+        status: 'Pending',
     },
     {
         id: '7',
@@ -74,7 +74,7 @@ export const orders = [
         price: '₹45.77',
         paymentStatus: 'COD',
         deliveryDate: '02/11/2024',
-        status: 'delivered',
+        status: 'Delivered',
     },
     {
         id: '8',
@@ -85,7 +85,7 @@ export const orders = [
         price: '₹47.36',
         paymentStatus: 'COD',
         deliveryDate: '02/11/2024',
-        status: 'pending',
+        status: 'Pending',
     },
     {
         id: '9',
@@ -96,7 +96,7 @@ export const orders = [
         price: '₹37.01',
         paymentStatus: 'UPI',
         deliveryDate: '02/11/2024',
-        status: 'delivered',
+        status: 'Delivered',
     },
     {
         id: '10',
@@ -107,6 +107,6 @@ export const orders = [
         price: '₹14.47',
         paymentStatus: 'UPI',
         deliveryDate: '02/11/2024',
-        status: 'pending',
+        status: 'Pending',
     },
 ];

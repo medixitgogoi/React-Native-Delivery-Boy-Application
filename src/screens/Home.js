@@ -81,7 +81,7 @@ const Home = () => {
           <View style={{ width: 23 }}>
             <Icon name="date-range" size={18} color="#9d9d9d" style={{}} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Delivery Date: {order.deliveryDate}</Text>
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Delivery Date: {order?.deliveryDate}</Text>
         </View>
 
         {/* Order Status */}
@@ -91,13 +91,13 @@ const Home = () => {
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
             <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Status:</Text>
-            {order.status === 'delivered' ? (
-              <View style={{ backgroundColor: '#a0df89', paddingHorizontal: 4, paddingVertical: 2, borderRadius: 4 }}>
-                <Text style={{ fontSize: responsiveFontSize(1.6), color: '#000', fontWeight: '500' }}>{order.status}</Text>
+            {order.status === 'Delivered' ? (
+              <View style={{ backgroundColor: '#a0df89', paddingHorizontal: 5, paddingVertical: 3, borderRadius: 4, elevation: 1 }}>
+                <Text style={{ fontSize: responsiveFontSize(1.5), color: '#000', fontWeight: '500' }}>{order.status}</Text>
               </View>
             ) : (
-              <View style={{ backgroundColor: '#ecdda0', paddingHorizontal: 4, paddingVertical: 2, borderRadius: 4 }}>
-                <Text style={{ fontSize: responsiveFontSize(1.6), color: '#856f1a', fontWeight: '500' }}>{order.status}</Text>
+              <View style={{ backgroundColor: '#FFF8E1', paddingHorizontal: 5, paddingVertical: 2, borderRadius: 4, elevation: 1, borderColor: '#e19e00', borderWidth: 0.5 }}>
+                <Text style={{ fontSize: responsiveFontSize(1.5), color: '#e19e00', fontWeight: '500' }}>{order.status}</Text>
               </View>
             )}
           </View>

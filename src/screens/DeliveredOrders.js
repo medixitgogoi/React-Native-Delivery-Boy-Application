@@ -12,7 +12,7 @@ import Icon4 from 'react-native-vector-icons/FontAwesome6';
 import Icon6 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/Entypo';
 import { deliveredOrdersData } from '../utils/deliveredOrdersData';
-r
+
 const DeliveredOrders = () => {
 
     const navigation = useNavigation();
@@ -249,7 +249,7 @@ const DeliveredOrders = () => {
                 data={filteredOrders}
                 renderItem={renderOrderItem}
                 keyExtractor={(item) => item.id}
-                contentContainerStyle={{ gap: 10, paddingHorizontal: 15, paddingVertical: 1 }}
+                contentContainerStyle={{ gap: 10, paddingHorizontal: 15, paddingVertical: 1, paddingBottom: 10 }}
                 ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: responsiveFontSize(1.8), color: '#737373', marginTop: 20 }}>No delivered orders found on {selectedDate?.toLocaleDateString()}.</Text>}
             />
         </View>
