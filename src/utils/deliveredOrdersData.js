@@ -171,7 +171,7 @@ export const deliveredOrdersData = [
             method: 'COD',
             details: {
                 paidVia: 'Cash',
-                amount: '₹35.00',
+                amount: '₹45.00',
             }
         },
         deliveryDate: '07/11/2024',

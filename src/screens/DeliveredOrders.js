@@ -12,7 +12,7 @@ import Icon4 from 'react-native-vector-icons/FontAwesome6';
 import Icon6 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/Entypo';
 import { deliveredOrdersData } from '../utils/deliveredOrdersData';
-
+r
 const DeliveredOrders = () => {
 
     const navigation = useNavigation();
@@ -182,7 +182,7 @@ const DeliveredOrders = () => {
                 </TouchableOpacity>
 
                 {/* Delivered Orders Text Centered */}
-                <View style={{ position: 'absolute', width: '100%', alignSelf: 'center', alignItems: 'center'}}>
+                <View style={{ flex: 1, alignItems: 'center' }}>
                     <Text style={{ fontSize: responsiveFontSize(2.3), fontWeight: '700', color: purple }}>
                         Delivered Orders
                     </Text>
@@ -191,19 +191,9 @@ const DeliveredOrders = () => {
                 {/* Date Picker Button */}
                 <TouchableOpacity
                     onPress={() => setShowDatePicker(true)}
-                    style={{
-                        alignItems: 'center',
-                        paddingVertical: 5,
-                        paddingHorizontal: 8,
-                        backgroundColor: '#e0e7ff',  // Light purple background
-                        borderRadius: 7,
-                        borderColor: '#6b46c1',  // Darker purple border
-                        borderWidth: 1,
-                    }}
+                    style={{ height: 30, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}
                 >
-                    <Text style={{ fontSize: responsiveFontSize(1.5), color: '#6b46c1', fontWeight: '600' }}>
-                        Select Date
-                    </Text>
+                    <Icon name="date-range" size={20} color="#000" />
                 </TouchableOpacity>
             </View>
 
