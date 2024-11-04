@@ -171,7 +171,7 @@ const DeliveredOrders = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: 20,
-                width: '100%'
+                width: '100%',
             }}>
                 {/* Sidebar Toggle Button */}
                 <TouchableOpacity
@@ -182,7 +182,7 @@ const DeliveredOrders = () => {
                 </TouchableOpacity>
 
                 {/* Delivered Orders Text Centered */}
-                <View style={{ flex: 1, alignItems: 'center' }}>
+                <View style={{ position: 'absolute', width: '100%', alignSelf: 'center', alignItems: 'center'}}>
                     <Text style={{ fontSize: responsiveFontSize(2.3), fontWeight: '700', color: purple }}>
                         Delivered Orders
                     </Text>
@@ -236,9 +236,8 @@ const DeliveredOrders = () => {
             }}>
                 {/* Total Cash Collection */}
                 <View style={{ alignItems: 'center', flexDirection: 'row', gap: 4 }}>
-                    <Text style={{ fontSize: responsiveFontSize(1.7), fontWeight: '600', color: '#333' }}>
-                        Total Cash Collection:
-                    </Text>
+                    <Text style={{ fontSize: responsiveFontSize(1.7), fontWeight: '600', color: '#333' }}>Total Cash Collection:</Text>
+
                     <View style={{ backgroundColor: '#000', paddingVertical: 4, paddingHorizontal: 10, borderRadius: 4 }}>
                         <Text style={{ fontSize: responsiveFontSize(1.6), fontWeight: '600', color: '#fff' }}>₹{totalCashCollection?.toFixed(2)}</Text>
                     </View>
@@ -260,7 +259,7 @@ const DeliveredOrders = () => {
                 data={filteredOrders}
                 renderItem={renderOrderItem}
                 keyExtractor={(item) => item.id}
-                contentContainerStyle={{ gap: 10, paddingHorizontal: 15 }}
+                contentContainerStyle={{ gap: 10, paddingHorizontal: 15, paddingVertical: 1 }}
                 ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: responsiveFontSize(1.8), color: '#737373', marginTop: 20 }}>No delivered orders found on {selectedDate?.toLocaleDateString()}.</Text>}
             />
         </View>
