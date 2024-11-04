@@ -17,15 +17,11 @@ const DeliveredOrders = () => {
 
     const navigation = useNavigation();
 
-    console.log('deliveredOrders: ', deliveredOrdersData);
-
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [filteredOrders, setFilteredOrders] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [deliveredOrders, setDeliveredOrders] = useState([]);
-
-    // console.log('selectedDate', selectedDate.toLocaleDateString());
 
     // useFocusEffect and useCallback
     useFocusEffect(
@@ -241,7 +237,7 @@ const DeliveredOrders = () => {
                     <Text style={{ fontSize: responsiveFontSize(1.7), fontWeight: '600', color: '#333' }}>
                         Total Cash Collection:
                     </Text>
-                    <View style={{ backgroundColor: '#000', paddingHorizontal: 5, borderRadius: 4, paddingVertical: 2 }}>
+                    <View style={{ backgroundColor: '#000', paddingVertical: 4, paddingHorizontal: 10, borderRadius: 4 }}>
                         <Text style={{ fontSize: responsiveFontSize(1.6), fontWeight: '600', color: '#fff' }}>₹{totalCashCollection?.toFixed(2)}</Text>
                     </View>
                 </View>
