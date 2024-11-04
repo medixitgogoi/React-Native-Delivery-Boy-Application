@@ -136,7 +136,7 @@ const Home = () => {
             gap: 5,
             elevation: 1
           }}>
-            <Text style={{ color: '#FFF', fontWeight: '600' }}>Reject</Text>
+            <Text style={{ color: '#FFF', fontWeight: '600' }}>Decline</Text>
             <Icon name="cancel" size={20} color="#fff" style={{ marginRight: 5 }} />
           </TouchableOpacity>
         </View>
