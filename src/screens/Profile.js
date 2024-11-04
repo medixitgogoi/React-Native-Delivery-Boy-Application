@@ -112,7 +112,7 @@ const Profile = () => {
                     </View>
 
                     {/* Payment Collection Section */}
-                    <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 15 }}>
+                    <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 7, marginTop: 15 }}>
                         <Icon name="money" size={16} color="#148186" />
                         <Text style={{ color: '#000', fontWeight: '600' }}>My Payment Collection</Text>
                     </View>
