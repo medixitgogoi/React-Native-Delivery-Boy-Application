@@ -11,11 +11,13 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import Icon4 from 'react-native-vector-icons/FontAwesome6';
 import Icon6 from 'react-native-vector-icons/AntDesign';
 import Icon5 from 'react-native-vector-icons/Entypo';
-import { orders } from '../utils/data';
+import { deliveredOrdersData } from '../utils/deliveredOrdersData';
 
 const DeliveredOrders = () => {
 
     const navigation = useNavigation();
+
+    console.log('deliveredOrders: ', deliveredOrdersData);
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [filteredOrders, setFilteredOrders] = useState([]);
@@ -28,8 +30,8 @@ const DeliveredOrders = () => {
     // useFocusEffect and useCallback
     useFocusEffect(
         useCallback(() => {
-            setDeliveredOrders(orders);
-            setFilteredOrders(orders);
+            setDeliveredOrders(deliveredOrdersData);
+            setFilteredOrders(deliveredOrdersData);
         }, [])
     );
 
@@ -235,10 +237,19 @@ const DeliveredOrders = () => {
                 elevation: 1,
             }}>
                 {/* Total Cash Collection */}
-                <View style={{
+                <View style={{ alignItems: 'center', flexDirection: 'row', gap: 4 }}>
+                    <Text style={{ fontSize: responsiveFontSize(1.7), fontWeight: '600', color: '#333' }}>
+                        Total Cash Collection:
+                    </Text>
+                    <View style={{ backgroundColor: '#000', paddingHorizontal: 5, borderRadius: 4, paddingVertical: 2 }}>
+                        <Text style={{ fontSize: responsiveFontSize(1.6), fontWeight: '600', color: '#fff' }}>₹{totalCashCollection?.toFixed(2)}</Text>
+                    </View>
+                </View>
+
+                {/* <View style={{
                     alignItems: 'center',
                     flexDirection: 'row',
-                    gap: 3
+                    gap: 3,
                 }}>
                     <Text style={{
                         fontSize: responsiveFontSize(1.7),
@@ -256,8 +267,9 @@ const DeliveredOrders = () => {
                             }}
                         >₹{totalCashCollection?.toFixed(2)}</Text>
                     </View>
-                </View>
+                </View> */}
 
+                {/* on */}
                 <Text style={{
                     fontSize: responsiveFontSize(1.8),
                     fontWeight: '500',

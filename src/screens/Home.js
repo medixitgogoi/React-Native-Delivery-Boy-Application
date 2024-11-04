@@ -11,54 +11,7 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
-
-const ordersData = [
-  {
-    id: '1',
-    customerName: 'Nick Adams',
-    location: '123 Main St, Springfield',
-    orderDescription: 'Apples, Orange Juice',
-    deliveryTime: '2:00 PM',
-    price: '₹15.00',
-    paymentStatus: 'COD',
-  },
-  {
-    id: '2',
-    customerName: 'Anthony Adverse',
-    location: '456 Elm St, Springfield',
-    orderDescription: 'Bread, Milk',
-    deliveryTime: '3:30 PM',
-    price: '₹12.50',
-    paymentStatus: 'UPI',
-  },
-  {
-    id: '3',
-    customerName: 'Sarah Johnson',
-    location: '789 Maple St, Springfield',
-    orderDescription: 'Eggs, Flour, Sugar',
-    deliveryTime: '4:00 PM',
-    price: '₹20.00',
-    paymentStatus: 'COD',
-  },
-  {
-    id: '4',
-    customerName: 'Michael Brown',
-    location: '101 Oak St, Springfield',
-    orderDescription: 'Chicken, Rice, Vegetables',
-    deliveryTime: '5:15 PM',
-    price: '₹30.75',
-    paymentStatus: 'UPI',
-  },
-  {
-    id: '5',
-    customerName: 'Emily White',
-    location: '202 Pine St, Springfield',
-    orderDescription: 'Pasta, Tomato Sauce',
-    deliveryTime: '6:45 PM',
-    price: '₹18.50',
-    paymentStatus: 'COD',
-  },
-];
+import { orders } from '../utils/homeData';
 
 const Home = () => {
 
@@ -115,12 +68,39 @@ const Home = () => {
           <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.orderDescription}</Text>
         </View>
 
-        {/* Price and Payment Status */}
+        {/* Price */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23 }}>
             <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>
           <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.price}</Text>
+        </View>
+
+        {/* Delivery Date */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+          <View style={{ width: 23 }}>
+            <Icon name="date-range" size={18} color="#9d9d9d" style={{}} />
+          </View>
+          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Delivery Date: {order.deliveryDate}</Text>
+        </View>
+
+        {/* Order Status */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
+          <View style={{ width: 23 }}>
+            <Icon4 name="circle-info" size={15} color="#9d9d9d" style={{ marginRight: 5, marginLeft: 1 }} />
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Status:</Text>
+            {order.status === 'delivered' ? (
+              <View style={{ backgroundColor: '#a0df89', paddingHorizontal: 4, paddingVertical: 2, borderRadius: 4 }}>
+                <Text style={{ fontSize: responsiveFontSize(1.6), color: '#000', fontWeight: '500' }}>{order.status}</Text>
+              </View>
+            ) : (
+              <View style={{ backgroundColor: '#ecdda0', paddingHorizontal: 4, paddingVertical: 2, borderRadius: 4 }}>
+                <Text style={{ fontSize: responsiveFontSize(1.6), color: '#856f1a', fontWeight: '500' }}>{order.status}</Text>
+              </View>
+            )}
+          </View>
         </View>
 
         {/* Accept/Reject Buttons */}
@@ -220,7 +200,7 @@ const Home = () => {
 
       {/* Orders List */}
       <FlatList
-        data={ordersData}
+        data={orders}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <OrderCard order={item} />}
         showsVerticalScrollIndicator={true}
