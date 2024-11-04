@@ -19,7 +19,8 @@ const DeliveredOrders = () => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [filteredOrders, setFilteredOrders] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [date, setDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [deliveredOrders, setDeliveredOrders] = useState([]);
 
@@ -129,6 +130,7 @@ const DeliveredOrders = () => {
         setShowDatePicker(false);
         if (date) {
             setSelectedDate(date);
+            setDate(date);
 
             // Format the new date to match the deliveryDate format in ordersData
             const selectedDat = date.toLocaleDateString();
@@ -208,7 +210,7 @@ const DeliveredOrders = () => {
             {/* Date Picker Modal */}
             {showDatePicker && (
                 <DateTimePicker
-                    value={selectedDate}
+                    value={date}
                     mode="date"
                     display="calendar"
                     onChange={onDateChange}
@@ -242,54 +244,15 @@ const DeliveredOrders = () => {
                     </View>
                 </View>
 
-                {/* <View style={{
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    gap: 3,
-                }}>
-                    <Text style={{
-                        fontSize: responsiveFontSize(1.7),
-                        fontWeight: '600',
-                        color: '#333'
-                    }}>
-                        Total Cash Collection:
-                    </Text>
-                    <View style={{ backgroundColor: '#000', paddingHorizontal: 5, borderRadius: 4, paddingVertical: 2 }}>
-                        <Text
-                            style={{
-                                fontSize: responsiveFontSize(1.6),
-                                fontWeight: '600',
-                                color: '#fff'
-                            }}
-                        >₹{totalCashCollection?.toFixed(2)}</Text>
-                    </View>
-                </View> */}
-
                 {/* on */}
-                <Text style={{
-                    fontSize: responsiveFontSize(1.8),
-                    fontWeight: '500',
-                    color: '#000',
-                }}>on</Text>
+                <Text style={{ fontSize: responsiveFontSize(1.8), fontWeight: '500', color: '#000' }}>on</Text>
 
                 {/* Selected Date */}
-                {selectedDate && selectedDate !== new Date() && (
-                    <View style={{
-                        backgroundColor: '#000',
-                        paddingVertical: 4,
-                        paddingHorizontal: 10,
-                        borderRadius: 5,
-                        elevation: 1
-                    }}>
-                        <Text style={{
-                            fontSize: responsiveFontSize(1.6),
-                            fontWeight: '600',
-                            color: '#fff'
-                        }}>
-                            {selectedDate ? selectedDate.toLocaleDateString() : 'All Orders'}
-                        </Text>
-                    </View>
-                )}
+                <View style={{ backgroundColor: '#000', paddingVertical: 4, paddingHorizontal: 10, borderRadius: 5, elevation: 1 }}>
+                    <Text style={{ fontSize: responsiveFontSize(1.6), fontWeight: '600', color: '#fff' }}>
+                        {selectedDate ? selectedDate.toLocaleDateString() : 'All Orders'}
+                    </Text>
+                </View>
             </View>
 
             {/* Delivered Orders List */}
@@ -298,7 +261,7 @@ const DeliveredOrders = () => {
                 renderItem={renderOrderItem}
                 keyExtractor={(item) => item.id}
                 contentContainerStyle={{ gap: 10, paddingHorizontal: 15 }}
-                ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: responsiveFontSize(1.8), color: '#737373', marginTop: 20 }}>No delivered orders found on {selectedDate.toLocaleDateString()}.</Text>}
+                ListEmptyComponent={<Text style={{ textAlign: 'center', fontSize: responsiveFontSize(1.8), color: '#737373', marginTop: 20 }}>No delivered orders found on {selectedDate?.toLocaleDateString()}.</Text>}
             />
         </View>
     );
