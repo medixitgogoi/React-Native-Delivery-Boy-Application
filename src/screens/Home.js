@@ -55,17 +55,17 @@ const Home = () => {
         {/* Location */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23 }}>
-            <Icon4 name="location-dot" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+            <Icon4 name="location-dot" size={17} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order.location}</Text>
+          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>{order.location}</Text>
         </View>
 
         {/* Order Description */}
         <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23, marginTop: 1 }}>
-            <Icon5 name="box" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+            <Icon5 name="box" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>
+          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>
             {order.orderDescription.map(item => item.product).join(', ')}
           </Text>
         </View>
@@ -73,26 +73,26 @@ const Home = () => {
         {/* Price */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23 }}>
-            <Icon4 name="money-bill" size={15} color="#9d9d9d" style={{ marginRight: 5 }} />
+            <Icon4 name="money-bill" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
+          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
         </View>
 
         {/* Delivery Date */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23 }}>
-            <Icon name="date-range" size={18} color="#9d9d9d" style={{}} />
+            <Icon name="date-range" size={17} color="#9d9d9d" style={{}} />
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Delivery Date: {order?.deliveryDate}</Text>
+          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>Delivery Date: {order?.deliveryDate}</Text>
         </View>
 
         {/* Order Status */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
           <View style={{ width: 23 }}>
-            <Icon4 name="circle-info" size={15} color="#9d9d9d" style={{ marginRight: 5, marginLeft: 1 }} />
+            <Icon4 name="circle-info" size={14} color="#9d9d9d" style={{ marginRight: 5, marginLeft: 1 }} />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', fontWeight: '500' }}>Status:</Text>
+            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>Status:</Text>
             {order.status === 'Delivered' ? (
               <View style={{ backgroundColor: '#a0df89', paddingHorizontal: 5, paddingVertical: 3, borderRadius: 4, elevation: 1 }}>
                 <Text style={{ fontSize: responsiveFontSize(1.5), color: '#000', fontWeight: '500' }}>{order.status}</Text>
@@ -146,11 +146,11 @@ const Home = () => {
         {/* Payment status */}
         <View style={{ position: 'absolute', top: 10, right: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{
-            fontSize: responsiveFontSize(1.6),
+            fontSize: responsiveFontSize(1.5),
             fontWeight: '700',
             color: order.paymentStatus === 'COD' ? '#FF6347' : '#1fc9d0',
             backgroundColor: order.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
-            paddingHorizontal: 8,
+            paddingHorizontal: 7,
             paddingVertical: 3,
             borderRadius: 6,
             borderColor: order.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
