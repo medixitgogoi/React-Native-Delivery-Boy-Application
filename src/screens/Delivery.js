@@ -102,7 +102,7 @@ const Delivery = ({ route }) => {
                                     >
                                         x
                                     </Text>
-                                    
+
                                     <View style={{ backgroundColor: '#000', borderRadius: 4, paddingHorizontal: 4, paddingVertical: 1 }}>
                                         <Text
                                             style={{
@@ -249,7 +249,7 @@ const Delivery = ({ route }) => {
                     </Text>
 
                     <View style={{
-                        backgroundColor: '#F0FFF4',
+                        backgroundColor: '#effff3',
                         padding: 15,
                         borderRadius: 10,
                         marginTop: 15,
