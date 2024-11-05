@@ -1,12 +1,12 @@
 import { View, Text, Image, TouchableOpacity, StatusBar, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { green, purple } from '../utils/colors'; // Import colors if needed
+import { green, purple } from '../utils/colors';
 import Sidebar from '../components/Sidebar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Octicons'; // Import the icon
-import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'; // Import the icon
+import Icon2 from 'react-native-vector-icons/Octicons'; 
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import LinearGradient from 'react-native-linear-gradient';
 
