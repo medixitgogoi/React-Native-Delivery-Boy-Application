@@ -119,7 +119,6 @@ const Delivery = ({ route }) => {
                         </View>
                     </View>
 
-
                     {/* Price and Payment Status */}
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
