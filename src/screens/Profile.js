@@ -63,7 +63,7 @@ const Profile = () => {
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={{
-                        borderRadius: 15,
+                        borderRadius: 12,
                         padding: 20,
                         flexDirection: 'column',
                         elevation: 1,
