@@ -96,7 +96,7 @@ const Profile = () => {
                         <View style={cardStyle('#EDF7EC')}>
                             <Icon name="check-circle" size={22} color="green" style={{ marginBottom: 5 }} />
                             <Text style={cardTextStyle}>20</Text>
-                            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#515151', width: '100%', textAlign: 'center', fontWeight: '400' }}>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', width: '100%', textAlign: 'center', fontWeight: '500' }}>
                                 Completed Deliveries
                             </Text>
                         </View>
@@ -105,7 +105,7 @@ const Profile = () => {
                         <View style={cardStyle('#FFE3E4')}>
                             <Icon3 name="clock" size={22} color="red" style={{ marginBottom: 5 }} />
                             <Text style={cardTextStyle}>23</Text>
-                            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#515151', width: '100%', textAlign: 'center', fontWeight: '400' }}>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', width: '100%', textAlign: 'center', fontWeight: '500' }}>
                                 Pending Deliveries
                             </Text>
                         </View>
@@ -119,14 +119,14 @@ const Profile = () => {
 
                     <View style={{
                         backgroundColor: '#F0F4FF',
-                        borderRadius: 15,
-                        padding: 20,
+                        borderRadius: 12,
+                        padding: 15,
                         elevation: 1,
                     }}>
                         {/* Total Amount Collected */}
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
-                            <Icon name="money" size={22} color="green" style={{ marginRight: 8 }} />
-                            <Text style={{ fontSize: responsiveFontSize(1.9), fontWeight: '500', color: '#148186' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+                            <Icon name="money" size={19} color="green" style={{ marginRight: 8 }} />
+                            <Text style={{ fontSize: responsiveFontSize(1.9), fontWeight: '500', color: '#000' }}>
                                 Total Collected:
                             </Text>
                             <Text style={{ fontSize: responsiveFontSize(1.9), fontWeight: '600', color: '#148186', marginLeft: 5 }}>
@@ -137,13 +137,13 @@ const Profile = () => {
                         {/* Payment Collection from Orders */}
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                             <View style={collectionCardStyle('#E8FFF4')}>
-                                <Icon3 name="currency-inr" size={20} color="#18a558" style={{ marginBottom: 5 }} />
+                                <Icon3 name="currency-inr" size={18} color="#18a558" style={{ marginBottom: 5 }} />
                                 <Text style={collectionCardTextStyle}>Cash</Text>
                                 <Text style={collectionAmountStyle}>₹7,000</Text>
                             </View>
 
                             <View style={collectionCardStyle('#FFF4E8')}>
-                                <Icon2 name="credit-card" size={20} color="#F3A953" style={{ marginBottom: 5 }} />
+                                <Icon2 name="credit-card" size={18} color="#F3A953" style={{ marginBottom: 5 }} />
                                 <Text style={collectionCardTextStyle}>UPI</Text>
                                 <Text style={collectionAmountStyle}>₹3,000</Text>
                             </View>
@@ -184,14 +184,14 @@ const collectionCardStyle = (bgColor) => ({
 });
 
 const collectionCardTextStyle = {
-    fontSize: responsiveFontSize(1.8),
+    fontSize: responsiveFontSize(1.6),
     fontWeight: '500',
     color: '#515151',
     textAlign: 'center',
 };
 
 const collectionAmountStyle = {
-    fontSize: responsiveFontSize(2.1),
+    fontSize: responsiveFontSize(1.9),
     fontWeight: '600',
     color: '#000',
 };
