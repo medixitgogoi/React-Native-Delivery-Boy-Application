@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StatusBar, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { green, purple } from '../utils/colors';
+import { purple } from '../utils/colors';
 import Sidebar from '../components/Sidebar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/MaterialIcons';
