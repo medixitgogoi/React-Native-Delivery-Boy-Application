@@ -1,23 +1,65 @@
-import { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StatusBar, FlatList } from 'react-native';
-import Icon2 from 'react-native-vector-icons/Octicons';
+import { useCallback, useState } from 'react';
+import { View, Text, TouchableOpacity, StatusBar, FlatList, Alert, BackHandler, StyleSheet, Image, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon3 from 'react-native-vector-icons/FontAwesome';
-import Icon4 from 'react-native-vector-icons/FontAwesome6';
-import Icon5 from 'react-native-vector-icons/Entypo';
-import Icon6 from 'react-native-vector-icons/MaterialIcons';
-import { purple, green } from '../utils/colors';
+import Icon3 from 'react-native-vector-icons/AntDesign';
+import { green, background, sidebarBackground } from '../utils/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
-import { orders } from '../utils/homeData';
+import LinearGradient from 'react-native-linear-gradient';
+import { useSelector } from 'react-redux';
+import { fetchTasks } from '../utils/fetchTasks';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 
-const Home = () => {
+const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
-  const navigation = useNavigation();
+const Home = ({ navigation }) => {
+
+  const userDetails = useSelector(state => state.user);
+  // console.log('userDetails: ', userDetails);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const [tasks, setTasks] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+
+  const [filtereedTasks, setFilteredTasks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        Alert.alert(
+          'Confirm Exit',
+          'Are you sure you want to exit the app?',
+          [
+            {
+              text: 'Cancel',
+              onPress: () => null, // Do nothing
+              style: 'cancel',
+            },
+            {
+              text: 'Exit',
+              onPress: () => BackHandler.exitApp(), // Exit the app
+            },
+          ],
+          { cancelable: false }
+        );
+        return true; // Prevent default back button behavior
+      };
+
+      // Add the event listener
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction
+      );
+
+      // Cleanup the event listener on unmount
+      return () => backHandler.remove();
+    }, [])
+  );
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -27,147 +69,138 @@ const Home = () => {
     setIsSidebarOpen(false);
   };
 
-  const OrderCard = ({ order }) => {
+  // Fetch tasks
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const data = await fetchTasks(userDetails);
+          setTasks(data.reverse());
+          setFilteredTasks(data.reverse());
+          console.log("Fetched tasks: ", data); // Add this for debugging
+        } catch (error) {
+          console.log('Error fetching tasks: ', error?.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, [userDetails])
+  );
+
+  // Filter clients based on the search query
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (query.trim() === '') {
+      setFilteredTasks(tasks);
+    } else {
+      const filtered = tasks?.filter(task =>
+        task.client_name?.toLowerCase().includes(query.toLowerCase())
+      );
+      console.log("Filtered tasks: ", filtered); // Log filtered results
+      setFilteredTasks(filtered);
+    }
+  };
+
+  // Flatlist component card
+  const TaskCard = ({ task }) => {
+
+    const isCompleted = task?.status === "2";
+    const statusText = isCompleted ? "Completed" : "Pending";
+    const statusColor = isCompleted ? "green" : "#e69500";
+
     return (
-      <View style={{
-        backgroundColor: '#FFF',
-        borderRadius: 15,
-        padding: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 4,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        elevation: 5,
-      }}>
-        {/* Customer Details */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-            <View style={{ width: 23 }}>
-              <Icon3 name="user" size={18} color="#9d9d9d" style={{ marginRight: 5 }} />
+      <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('TaskDetails', { taskId: task?.id })} style={{ elevation: 4 }}>
+        <LinearGradient
+          colors={['#fff', '#b8dfa4']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{
+            borderRadius: 15,
+            padding: 5,
+            marginBottom: 15,
+            borderColor: green,
+            borderWidth: 1
+          }}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center', elevation: 2, marginBottom: 10, backgroundColor: '#4ec176', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 8, borderTopLeftRadius: 12, borderTopRightRadius: 12, borderBottomRightRadius: 3, borderBottomLeftRadius: 3 }}>
+            <Icon name="assignment" size={20} color="#000" />
+
+            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#000', marginLeft: 5 }}>
+              {task.project_name}
+            </Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5, margin: 6, gap: 3 }}>
+            <View style={{ backgroundColor: '#cee9c0', width: 25, height: 25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 6, borderWidth: 1, borderColor: green }}>
+              <Icon name="location-pin" size={16} color="#000" />
             </View>
-            <Text style={{ fontSize: responsiveFontSize(2.1), fontWeight: '600', color: '#9f6efe' }}>{order?.customerName}</Text>
+            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', marginLeft: 5, fontWeight: '500' }}>{task.client_address}</Text>
           </View>
-        </View>
 
-        {/* Location */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-          <View style={{ width: 23 }}>
-            <Icon4 name="location-dot" size={17} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5, margin: 6, gap: 3 }}>
+            <View style={{ backgroundColor: '#cee9c0', width: 25, height: 25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 6, borderWidth: 1, borderColor: green }}>
+              <Icon name="date-range" size={15} color="#000" />
+            </View>
+            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', marginLeft: 5, fontWeight: '500' }}>
+              Deadline: {task.deadline_date}
+            </Text>
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>{order.location}</Text>
-        </View>
 
-        {/* Order Description */}
-        <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 3, marginBottom: 8 }}>
-          <View style={{ width: 23, marginTop: 1 }}>
-            <Icon5 name="box" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5, margin: 6, gap: 3 }}>
+            <View style={{ backgroundColor: '#cee9c0', width: 25, height: 25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 6, borderWidth: 1, borderColor: green }}>
+              <Icon name="account-circle" size={16} color="#000" />
+            </View>
+            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', marginLeft: 5, fontWeight: '500' }}>
+              Client name: {renderHighlightedText(task.client_name, searchQuery)}
+            </Text>
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>
-            {order.orderDescription.map(item => item.product).join(', ')}
-          </Text>
-        </View>
 
-        {/* Price */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-          <View style={{ width: 23 }}>
-            <Icon4 name="money-bill" size={14} color="#9d9d9d" style={{ marginRight: 5 }} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5, margin: 6, gap: 3 }}>
+            <View style={{ backgroundColor: '#cee9c0', width: 25, height: 25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 6, borderWidth: 1, borderColor: green }}>
+              <Icon
+                name={isCompleted ? "check-circle" : "hourglass-empty"}
+                size={15}
+                color={statusColor}
+              />
+            </View>
+
+            <Text style={{ fontSize: responsiveFontSize(1.9), color: '#000', marginLeft: 5, fontWeight: '500' }}>
+              {statusText}
+            </Text>
           </View>
-          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>{order?.price}</Text>
-        </View>
+        </LinearGradient>
+      </TouchableOpacity>
+    );
+  };
 
-        {/* Delivery Date */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-          <View style={{ width: 23 }}>
-            <Icon name="date-range" size={17} color="#9d9d9d" style={{}} />
-          </View>
-          <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>Delivery Date: {order?.deliveryDate}</Text>
-        </View>
+  // Function to render highlighted text
+  const renderHighlightedText = (text, highlight) => {
+    if (!highlight.trim()) {
+      return <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '500', color: '#333' }}>{text}</Text>;
+    }
 
-        {/* Order Status */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, marginBottom: 8 }}>
-          <View style={{ width: 23 }}>
-            <Icon4 name="circle-info" size={14} color="#9d9d9d" style={{ marginRight: 5, marginLeft: 1 }} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-            <Text style={{ fontSize: responsiveFontSize(1.8), color: '#000', fontWeight: '500' }}>Status:</Text>
-            {order.status === 'Delivered' ? (
-              <View style={{ backgroundColor: '#a0df89', paddingHorizontal: 5, paddingVertical: 3, borderRadius: 4, elevation: 1 }}>
-                <Text style={{ fontSize: responsiveFontSize(1.5), color: '#000', fontWeight: '500' }}>{order.status}</Text>
-              </View>
-            ) : (
-              <View style={{ backgroundColor: '#FFF8E1', paddingHorizontal: 5, paddingVertical: 2, borderRadius: 4, elevation: 1, borderColor: '#e19e00', borderWidth: 0.5 }}>
-                <Text style={{ fontSize: responsiveFontSize(1.5), color: '#e19e00', fontWeight: '500' }}>{order.status}</Text>
-              </View>
-            )}
-          </View>
-        </View>
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
 
-        {/* Accept/Reject Buttons */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '100%' }}>
-          {/* Accept */}
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#6ae4e9',
-              paddingVertical: 8,
-              width: '48%',
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 5,
-              flexDirection: 'row',
-              elevation: 1
-            }}
-            onPress={() => navigation.navigate('Delivery', { data: order })}
-          >
-            <Text style={{ color: '#000', fontWeight: '600' }}>Accept</Text>
-            <Icon name="check-circle" size={20} color="#000" style={{ marginRight: 5 }} />
-          </TouchableOpacity>
-
-          {/* Reject */}
-          <TouchableOpacity style={{
-            backgroundColor: '#ef2400',
-            paddingVertical: 8,
-            width: '48%',
-            borderRadius: 8,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            gap: 5,
-            elevation: 1
-          }}>
-            <Text style={{ color: '#FFF', fontWeight: '600' }}>Decline</Text>
-            <Icon name="cancel" size={20} color="#fff" style={{ marginRight: 5 }} />
-          </TouchableOpacity>
-        </View>
-
-        {/* Payment status */}
-        <View style={{ position: 'absolute', top: 10, right: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{
-            fontSize: responsiveFontSize(1.5),
-            fontWeight: '700',
-            color: order.paymentStatus === 'COD' ? '#FF6347' : '#1fc9d0',
-            backgroundColor: order.paymentStatus === 'COD' ? '#FFE8E6' : '#E6FAFB',
-            paddingHorizontal: 7,
-            paddingVertical: 3,
-            borderRadius: 6,
-            borderColor: order.paymentStatus === 'COD' ? '#ff7468' : '#1eb6bd',
-            borderWidth: 0.6
-          }}>
-            {order.paymentStatus}
-          </Text>
-        </View>
-      </View>
+    return (
+      <Text style={{ fontSize: responsiveFontSize(2), fontWeight: '500', color: '#333' }}>
+        {parts.map((part, index) =>
+          part.toLowerCase() === highlight.toLowerCase() ? (
+            <Text key={index} style={{ backgroundColor: 'yellow', color: '#000' }}>{part}</Text>
+          ) : (
+            part
+          )
+        )}
+      </Text>
     );
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F5FA', paddingHorizontal: 0 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: background, paddingHorizontal: 0 }}>
       <StatusBar
         animated={true}
-        backgroundColor={'#F4F5FA'}
+        backgroundColor={isSidebarOpen ? sidebarBackground : background}
         barStyle="dark-content"
       />
 
@@ -175,41 +208,122 @@ const Home = () => {
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} closeSidebar={closeSidebar} navigation={navigation} activeItem="Home" />
 
       {/* Header */}
-      <View style={{ paddingHorizontal: 15, marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+      <View style={{ paddingHorizontal: 15, marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, width: '100%' }}>
         <TouchableOpacity onPress={toggleSidebar} style={{ width: '10%', height: 30, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-          <Icon2 name="sidebar-collapse" size={16} color="#000" />
+          <Icon name="menu" size={22} color="#000" />
         </TouchableOpacity>
+
         <View style={{ width: '80%' }}>
-          <Text style={{ fontSize: responsiveFontSize(2.3), fontWeight: '700', color: purple, textAlign: 'center' }}>Today's Orders</Text>
+          <Text style={{ fontSize: responsiveFontSize(2.3), fontWeight: '700', color: '#000', textAlign: 'center' }}>Dashboard</Text>
         </View>
-        <View style={{ width: '10%' }} />
+
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={{ borderColor: '#000', borderWidth: 0.5, width: 28, elevation: 1, backgroundColor: '#d3ebc6', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: 28, borderRadius: 30 }}>
+          <Icon3 name="user" size={15} color="#000" />
+        </TouchableOpacity>
       </View>
 
-      {/* Profile Section */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 15, alignSelf: 'center' }}>
-        <View style={{ elevation: 1, width: 80, height: 80 }}>
-          <Image
-            source={require('../assets/avatar.png')}
-            style={{ width: '100%', height: '100%', borderRadius: 40, marginRight: 15 }}
-          />
-        </View>
+      {/* Add a New Client / Add a New Visit */}
+      <View style={{ paddingHorizontal: 10, marginBottom: 20, marginTop: 5, width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('NewClientForm')} style={{ marginTop: 0, elevation: 2, backgroundColor: green, width: '49%', alignSelf: 'center', paddingVertical: 13, gap: 5, borderRadius: 11, flexDirection: 'row', justifyContent: 'center' }}>
+          <Text style={{ color: '#000', fontWeight: '600', fontSize: responsiveFontSize(2) }}>Add a New Client</Text>
+          <Icon3 name="plussquare" size={18} color="#000" />
+        </TouchableOpacity>
 
-        <View>
-          <Text style={{ fontSize: responsiveFontSize(2), fontWeight: 'bold', color: '#000' }}>Delivery Boy</Text>
-          <Text style={{ fontSize: responsiveFontSize(1.8), color: 'gray' }}>deliveryboy@gmail.com</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('NewTask')} style={{ marginVertical: 0, elevation: 2, backgroundColor: green, width: '49%', alignSelf: 'center', paddingVertical: 13, gap: 5, borderRadius: 11, flexDirection: 'row', justifyContent: 'center' }}>
+          <Text style={{ color: '#000', fontWeight: '600', fontSize: responsiveFontSize(2) }}>Add a New Visit</Text>
+          <Icon3 name="plussquare" size={18} color="#000" />
+        </TouchableOpacity>
       </View>
 
-      {/* Orders List */}
-      <FlatList
-        data={orders}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <OrderCard order={item} />}
-        showsVerticalScrollIndicator={true}
-        contentContainerStyle={{ paddingHorizontal: 15, paddingTop: 10, gap: 15, paddingBottom: 15 }}
-      />
+      {/* Heading */}
+      <LinearGradient
+        colors={['#F4F5FA', '#bde1ab', '#F4F5FA']}
+        start={{ x: 0, y: 0.5 }}
+        end={{ x: 1, y: 0.5 }}
+        style={{
+          paddingVertical: 8,
+          paddingHorizontal: 15,
+          borderRadius: 8,
+          alignItems: 'center',
+          marginBottom: 10,
+        }}
+      >
+        <View style={{ alignSelf: 'center' }}>
+          <Text style={{ color: '#000', fontSize: responsiveFontSize(2), fontWeight: '600' }}>
+            Clients Visits
+          </Text>
+        </View>
+      </LinearGradient>
+
+      {/* Search Bar */}
+      <View style={{ paddingHorizontal: 10, marginBottom: 10, marginTop: 15 }}>
+        <TextInput
+          placeholder="Search by a client name"
+          placeholderTextColor={'#a9a9a9'}
+          value={searchQuery}
+          onChangeText={handleSearch}
+          style={{
+            height: 42,
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: green,
+            paddingHorizontal: 15,
+            backgroundColor: '#fff',
+            color: '#000',
+            fontWeight: '500'
+          }}
+        />
+      </View>
+
+      {/* FlatList of Tasks */}
+      {loading ? (
+        <View style={{ paddingHorizontal: 10 }}>
+          {[...Array(5)].map((_, index) => (
+            <ShimmerPlaceHolder
+              key={index}
+              style={{
+                height: 150,
+                width: '100%',
+                borderRadius: 15,
+                elevation: 4,
+                marginVertical: 5,
+              }}
+            />
+          ))}
+        </View>
+      ) : (
+        <FlatList
+          data={filtereedTasks}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <TaskCard task={item} />}
+          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 1, paddingVertical: 1, marginTop: 10, paddingHorizontal: 10 }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => (
+            <View style={styles.emptyContainer}>
+              <Image source={require('../assets/notasks.png')} style={{ width: 100, height: 100 }} />
+              <Text style={styles.emptyText}>No tasks available currently</Text>
+            </View>
+          )}
+        />
+      )}
     </SafeAreaView>
   );
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  emptyContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    gap: 8,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  emptyText: {
+    fontSize: responsiveFontSize(2.2),
+    fontWeight: '500',
+    color: '#ababab',
+  },
+});

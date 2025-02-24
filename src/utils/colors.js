@@ -1,2 +1,4 @@
-export const purple = '#9f6efe';
-export const green = '#6ae4e9';
+export const purple = '#F8F8F8';
+export const green = '#75c14e';
+export const background = '#fafafd';
+export const sidebarBackground = '#e7e7e7';

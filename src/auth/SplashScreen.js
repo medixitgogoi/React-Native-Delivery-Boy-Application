@@ -5,18 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const SplashScreen = () => {
-    
+
     const navigation = useNavigation();
-    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+    const fadeAnim = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        // Start the fade-in animation when the component is mounted
         Animated.timing(fadeAnim, {
-            toValue: 1, // Fade to opacity 1
-            duration: 1200, // Duration of animation in ms
-            useNativeDriver: true, // Use native driver for better performance
+            toValue: 1,
+            duration: 1200,
+            useNativeDriver: true,
         }).start(() => {
-            // After the animation completes, navigate to the Login screen
             navigation.navigate('Login');
         });
     }, [fadeAnim]);
@@ -30,13 +28,13 @@ const SplashScreen = () => {
             />
 
             <LinearGradient
-                colors={[green, '#c4a6fe']}
+                colors={[green, '#fff']}
                 style={{ height: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}
             >
                 <View style={{ height: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <Animated.View style={{ opacity: fadeAnim }}>
                         <Image
-                            source={require("../assets/splashLogo.png")}
+                            source={require("../assets/logo.png")}
                             style={{
                                 width: 270,
                                 height: 270,

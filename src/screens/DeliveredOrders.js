@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Sidebar from '../components/Sidebar';
 import Icon2 from 'react-native-vector-icons/Octicons';
-import { green, purple } from '../utils/colors';
+import { background, green, purple } from '../utils/colors';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
@@ -153,7 +153,7 @@ const DeliveredOrders = () => {
     }, 0);
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#F4F5FA', }}>
+        <View style={{ flex: 1, backgroundColor: background, }}>
             <StatusBar
                 animated={true}
                 backgroundColor={'#F4F5FA'}

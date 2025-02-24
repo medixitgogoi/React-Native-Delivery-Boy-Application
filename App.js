@@ -1,37 +1,51 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './src/screens/Home';
-import Login from './src/auth/Login';
-import SplashScreen from './src/auth/SplashScreen';
-import Profile from './src/screens/Profile';
-import Delivery from './src/screens/Delivery';
 import Toast from 'react-native-toast-message';
-import DeliveredOrders from './src/screens/DeliveredOrders';
+import axios from "axios";
+import { store } from './src/redux/store';
+import { Provider } from 'react-redux';
+import StackNavigation from './src/navigation/StackNavigation';
+import { PermissionsAndroid } from 'react-native';
+import { useEffect } from 'react';
 
-const Stack = createNativeStackNavigator();
+axios.defaults.baseURL = 'https://superlite.webinfoghy.co.in/';
 
 const App = () => {
+
+  const requestLocationPermission = async () => {
+    try {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: "Location Permission",
+            message:
+              "This app needs access to your location " +
+              "so you can use location-based features.",
+            buttonNeutral: "Ask Me Later",
+            buttonNegative: "Cancel",
+            buttonPositive: "OK"
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log("Location permission granted");
+        } else {
+          console.log("Location permission denied");
+        }
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  useEffect(() => {
+    requestLocationPermission();
+  });
+
   return (
-    <>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName={"SplashScreen"}
-          screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right',
-          }}
-        >
-          <Stack.Screen name="SplashScreen" component={SplashScreen} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="Delivery" component={Delivery} />
-          <Stack.Screen name="DeliveredOrders" component={DeliveredOrders} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <Provider store={store}>
+      <StackNavigation />
       <Toast />
-    </>
+    </Provider>
   );
-}
+};
 
 export default App;
