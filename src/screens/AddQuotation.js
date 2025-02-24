@@ -56,6 +56,11 @@ const sizeType = [
 
 const AddQuotation = ({ navigation }) => {
 
+    const breakageRef = useRef(null);
+    breakageRef.current = breakageValue;
+
+    console.log('breakageValue: ', breakageValue);
+
     const userDetails = useSelector(state => state.user);
 
     const [text, setText] = useState('');
@@ -71,6 +76,8 @@ const AddQuotation = ({ navigation }) => {
     const [bankDetails, setBankDetails] = useState(null);
 
     const [selectedAddressType, setselectedAddressType] = useState(null);
+
+    const breakageValue = selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : selectedAddressType?.id === 2 ? 'N/A' : '';
 
     const [selectedPaymentType, setSelectedPaymentType] = useState(null);
 
@@ -666,7 +673,12 @@ const AddQuotation = ({ navigation }) => {
                                 <Text style={{ color: '#000', fontSize: responsiveFontSize(2), fontWeight: '500' }}>Select Breakage (in %)</Text>
                             </View>
 
-                            <SelectDropdown
+                            <View style={{ backgroundColor: '#f0f8ec', borderColor: green, borderWidth: 1, borderRadius: 10, paddingVertical: 8, paddingLeft: 10 }}>
+                                {/* <Text style={{ color: '#000', fontWeight: '600' }}>{selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : 'N/A'}</Text> */}
+                                <Text ref={breakageRef} style={{ color: '#000', fontWeight: '600' }}>{breakageValue}</Text>
+                            </View>
+
+                            {/* <SelectDropdown
                                 data={breakage}
                                 onSelect={(selectedItem, index) => {
                                     // console.log('selected company: ', selectedItem, index);
@@ -691,7 +703,7 @@ const AddQuotation = ({ navigation }) => {
                                 }}
                                 showsVerticalScrollIndicator={false}
                                 dropdownStyle={styles.dropdownMenuStyle}
-                            />
+                            /> */}
                         </View>
 
                         {/* Need for Unloading */}
