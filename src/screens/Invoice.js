@@ -51,31 +51,31 @@ const Invoice = ({ navigation, route }) => {
         return productDataArray
             .map((product, index) => `
                 <div style="display: flex; flex-direction: row; ">
-                    <div style="width: 10%; border: 1px solid black; text-align: center; padding: 8px; color: #000; fontSize: 11px;">
+                    <div style="width: 10%; border: 1px solid black; text-align: center; padding: 8px; color: #000; fontSize: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
                         ${index + 1}
                     </div>
                     
-                    <div style="width: 25%; border: 1px solid black; text-align: center; padding: 8px; color: #000; fontSize: 11px;">
+                    <div style="width: 25%; border: 1px solid black; text-align: center; padding: 8px; color: #000; fontSize: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
                         ${product?.productType || ''}
                     </div>
                     
                     ${product?.sizeType === 'Bag' ? `
-                        <div style="width: 45%; border: 1px solid black; text-align: center; padding: 5px; color: #000; fontSize: 11px;">
-                            ${product?.bagSize || ''} KG Bag
+                        <div style="width: 45%; border: 1px solid black; text-align: center; padding: 5px; color: #000; fontSize: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
+                            Weight: ${product?.bagSize || ''} KG Bag
                         </div>
                     `: `
-                        <div style="width: 45%; border: 1px solid black; text-align: center; padding: 5px; color: #000; fontSize: 11px;">
-                            ${product?.sizeType || ''}, ${product?.length || ''} x ${product?.height || ''} x ${product?.thickness || ''}
+                        <div style="width: 45%; border: 1px solid black; text-align: center; padding: 5px; color: #000; fontSize: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
+                            Size in mm: ${product?.sizeType || ''}, ${product?.length || ''} x ${product?.height || ''} x ${product?.thickness || ''}
                         </div>
                     `}
 
                     ${product?.sizeType === 'Bag' ? `
-                        <div style="width: 20%; border: 1px solid black; text-align: center; padding: 2px; color: #000; fontSize: 11px;">
-                           Rate/Bag (₹ ${product?.ratePerBag || ''}/-)
+                        <div style="width: 20%; border: 1px solid black; text-align: center; padding: 2px; color: #000; fontSize: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
+                           ₹${product?.ratePerBag || ''}/Bag
                         </div>
                     `: `
-                        <div style="width: 20%; border: 1px solid black; text-align: center; padding: 2px; color: #000; fontSize: 11px;">
-                           Rate/Cu.M (₹ ${product?.customRate || ''}/-)
+                        <div style="width: 20%; border: 1px solid black; text-align: center; padding: 2px; color: #000; fontSize: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
+                           ₹${product?.customRate || ''}/Cu.M
                         </div>
                     `}
                 </div>
@@ -126,42 +126,49 @@ const Invoice = ({ navigation, route }) => {
         </head>
 
         <body style="margin: 0; padding: 8px; width: ${width}; box-sizing: border-box;">
-            <div class="header" style="text-align: center; margin-bottom: 20px;">
-                <h1 style="font-size: 12px; color: white; font-weight: bold; background-color: green;">QUOTATION FOR ${data?.address_type?.title} (FOR)</h1>
-                <h2 style="text-align: center; font-size: 12px; color: black; font-weight: bold; background-color: yellow; text-transform: uppercase; ">
-                    NAME OF THE COMPANY FROM WHICH BILLING SHOULD BE DONE: ${data?.company_name}
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h1 style="font-size: 14px; font-weight: bold; color: #666; margin: 0; margin-top: 5px;">EVERGREEN BLOCKS AND SOLUTIONS</h1>
+                <h2 style="font-size: 12px; font-weight: normal; color: #888; margin: 0;">
+                    (C & F Agent of Superlite AAC Blocks Industry)
                 </h2>
+                <p style="font-size: 12px; color: #666; margin: 0;">
+                    Corporate Office: Evergreen Blocks and Solutions, 4<sup>th</sup> Floor, P.B. Choudhury Mansion, 
+                    Dr. B.K. Kakati Road, Ulubari, Guwahati, Assam - 781007
+                </p>
+                <p style="font-size: 12px; color: #666; margin: 0; ">
+                    GSTIN: 18AAKFE6817H1Z6
+                </p>
+                <hr style="border: 0.5px solid #000; width: 100%; marginTop: 10px; marginBottom: 10px;">
+                <h2 style="font-size: 14px; font-weight: bold; color: black; margin: 0;">QUOTATION</h2>
             </div>
 
             <div style="color: black;">
-                <p style="font-size: 12px; font-weight: bold; margin: 0px;">To:</p>
-                <p style="font-size: 12px; margin: 1px; font-weight: bold;">DATED - ${formattedDate}</p>
-                <p style="margin: 1px; font-size: 12px; ">${data?.company_name}</p>
+                <p style="font-size: 12px; margin: 0px;">To,</p>
+                <p style="font-size: 12px; margin: 0px;">${data?.apiData?.client_name}</p>
                 <p style="margin: 1px; font-size: 12px; ">Address: ${data?.apiData?.client_address}</p>
                 <p style="margin: 1px; font-size: 12px; ">${data?.apiData?.project_name} & LOCATION</p>
+                <p style="font-size: 12px; margin: 1px;">DATED: ${formattedDate}</p>
                 <p style="margin: 1px; font-size: 12px; ">Kind Attention Mr/Ms. <span class="highlight" style="font-weight: bold;">${data?.apiData?.client_name}</span> (${data?.apiData?.client_mobile} & Email)</p>
             </div>
 
-            <h3 style="text-decoration: underline; text-align: center; margin: 20px auto; font-size: 11px; width: 93%; color: black;">Sub: Offer for supply of AAC Blocks & Fix-O-Block for your location at ${data?.address_type?.title}</h3>
-
-            <h6 style="text-decoration: underline; text-align: center; margin: 10px auto; font-size: 10px; width: 93%; color: black;">This has reference to your discussion with our management on the above subject; we are giving you here below the best offer for the subjected material</h6>
+            <h3 style="text-align: center; margin: 20px auto; font-size: 12px; width: 97%; color: black;">Sub: Offer for supply of ${data?.pad_type === 'Evergreen Blocks & Solutions (Use Evergreen Pad)' ? 'AAC Blocks & Fix-O-Block' : data?.pad_type === 'Superlite AAC Blocks Industry (Use Superlite AAC Pad)' ? 'AAC Blocks' : 'Fix-O-Block'} for your location at ${data?.address_type?.title}</h3>
 
             <!-- Table Container -->
             <div style="border: 1px solid black; font-size: 14px; font-family: Arial, sans-serif;">
                 <div style="display: flex; flex-direction: row; background-color: #f0f0f0; font-weight: bold; border-bottom: 1px solid black;">
-                    <div style="width: 10%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 12px;">
+                    <div style="width: 10%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
                         Sl No
                     </div>
 
-                    <div style="width: 25%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 12px;">
+                    <div style="width: 25%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
                         Item description
                     </div>
 
-                    <div style="width: 45%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 12px;">
-                        Size in mm
+                    <div style="width: 45%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
+                        Item details
                     </div>
 
-                    <div style="width: 20%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 12px;">
+                    <div style="width: 20%; border: 1px solid black; text-align: center; padding: 5px; color: black; font-size: 11px; flexDirection: row; justifyContent: center; alignItems: center;">
                         Rate
                     </div>
                 </div>
@@ -181,14 +188,14 @@ const Invoice = ({ navigation, route }) => {
                         ${data?.is_unloading === 2 ? `
                             <span>Unloading should be borne and arranged by your end.</span>
                         `: `
-                            <span>Rate inclusive of 12% GST on Blocks & 18% GST on Fix-O-Block</span>
+                            <span>Rate inclusive of ${data?.pad_type === 'Evergreen Blocks & Solutions (Use Evergreen Pad)' ? '12% GST on Blocks & 18% GST on Fix-O-Block' : data?.pad_type === 'Superlite AAC Blocks Industry (Use Superlite AAC Pad)' ? '12% GST on Blocks' : '18% GST on Fix-O-Block'}</span>
                         `}
                     </div>
                     
                     <div style="margin-bottom: 5px;">
-                        <span style="background-color: yellow;"Payment: Advance NEFT/RTGS</span>
+                        <span style="background-color: yellow; color: black;">Payment: Advance NEFT/RTGS</span>
 
-                        ${data?.payment_mode === 3 ? `
+                        ${data?.payment_mode === 2 ? `
                             <span style="background-color: yellow;">/CREDIT ${data?.credit_days} days</span>
                         `: ``}
                     </div>
@@ -214,7 +221,7 @@ const Invoice = ({ navigation, route }) => {
                     </div>
 
                     <div style="margin-bottom: 5px;">
-                        <span style="background-color: yellow;">Please give us your schedule of requirement & lifting well in advance.</span>
+                        <span style="background-color: yellow;">Please give the schedule of requirement & indents well in advance.</span>
                     </div>
 
                     <div style="margin-bottom: 5px;">

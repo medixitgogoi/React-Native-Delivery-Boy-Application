@@ -28,9 +28,9 @@ const pads = [
 ];
 
 const addressTypes = [
-    { id: 1, title: 'Guwahati' },
-    { id: 2, title: 'Out_station' },
-    { id: 3, title: 'Ex_plant' },
+    { id: 1, title: 'GUWAHATI' },
+    { id: 2, title: 'OUT_STATION' },
+    { id: 3, title: 'EX_PLANT' },
 ];
 
 const payment = [
@@ -56,11 +56,6 @@ const sizeType = [
 
 const AddQuotation = ({ navigation }) => {
 
-    const breakageRef = useRef(null);
-    breakageRef.current = breakageValue;
-
-    console.log('breakageValue: ', breakageValue);
-
     const userDetails = useSelector(state => state.user);
 
     const [text, setText] = useState('');
@@ -76,8 +71,6 @@ const AddQuotation = ({ navigation }) => {
     const [bankDetails, setBankDetails] = useState(null);
 
     const [selectedAddressType, setselectedAddressType] = useState(null);
-
-    const breakageValue = selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : selectedAddressType?.id === 2 ? 'N/A' : '';
 
     const [selectedPaymentType, setSelectedPaymentType] = useState(null);
 
@@ -155,9 +148,9 @@ const AddQuotation = ({ navigation }) => {
         fetchData();
     }, []);
 
-    // first Proceed Handler
+    // First Proceed Handler
     const firstProceedHandler = () => {
-        if (!selectedCompany || !selectedPad || !selectedClient || !selectedAddressType || !selectedPaymentType || !selectedBreakage || !selectedUnloading || !detentionCharge || !quotationValidity || (selectedPaymentType?.title === 'CREDIT' && !noOfCreditDays)) {
+        if (!selectedCompany || !selectedClient || !selectedAddressType || !selectedPaymentType || !selectedUnloading || !detentionCharge || !quotationValidity || (selectedPaymentType?.title === 'CREDIT' && !noOfCreditDays)) {
             Toast.show({
                 type: 'error',
                 text1: 'All the fields are mandatory',
@@ -288,7 +281,7 @@ const AddQuotation = ({ navigation }) => {
             const formData = new FormData();
 
             formData.append('company_name', selectedCompany?.title || '');
-            formData.append('pad_type', selectedPad?.id || '');
+            formData.append('pad_type', selectedCompany?.id || '');
             formData.append('client_id', selectedClient?.id || '');
             formData.append('address_type', selectedAddressType?.id || '');
             formData.append('payment_mode', selectedPaymentType?.id || '');
@@ -298,7 +291,7 @@ const AddQuotation = ({ navigation }) => {
                 formData.append('credit_days', noOfCreditDays);
             }
 
-            formData.append('breakage', selectedBreakage?.title || '');
+            formData.append('breakage', selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : selectedAddressType?.id === 3 ? 'N/A' : '');
             formData.append('is_unloading', selectedUnloading?.id || '');
             formData.append('detention_charge', detentionCharge ? detentionCharge?.toString() : '');
             formData.append('validity', quotationValidity ? quotationValidity?.toString() : '');
@@ -318,7 +311,8 @@ const AddQuotation = ({ navigation }) => {
                     height: product?.height,
                     thickness: product?.thickness,
                     customRate: product?.customRate,
-                    bagSize: product?.bagSize,
+                    // bagSize: product?.bagSize,
+                    bagSize: 26,
                     ratePerBag: product?.ratePerBag,
                 };
 
@@ -336,7 +330,8 @@ const AddQuotation = ({ navigation }) => {
                         formData.append('aac_blocks_cu_rate', product.customRate);
                     } else {
                         formData.append('aac_blocks_size_type', 2);
-                        formData.append('aac_blocks_bag', product.bagSize || '');
+                        // formData.append('aac_blocks_bag', product.bagSize || '');
+                        formData.append('aac_blocks_bag', 26);
                         formData.append('aac_blocks_bag_rate', product.ratePerBag || '');
                     }
                 } else if (product.productType === 'Fix-O-Blocks') {
@@ -351,7 +346,8 @@ const AddQuotation = ({ navigation }) => {
                         formData.append('fix_blocks_cu_rate', product.customRate);
                     } else {
                         formData.append('fix_blocks_size_type', 2);
-                        formData.append('fix_blocks_bag', product.bagSize || '');
+                        // formData.append('fix_blocks_bag', product.bagSize || '');
+                        formData.append('fix_blocks_bag', 26);
                         formData.append('fix_blocks_bag_rate', product.ratePerBag || '');
                     }
                 }
@@ -364,18 +360,18 @@ const AddQuotation = ({ navigation }) => {
                 },
             });
 
-            console.log('quotation add response: ', response);
+            console.log('Quotation add response: ', response);
 
             if (response?.data?.status) {
                 // Create an object with the necessary details
                 const quotationDetails = {
                     company_name: selectedCompany?.title || '',
-                    pad_type: selectedPad?.id || '',
+                    pad_type: selectedCompany?.id === 1 ? 'Evergreen Blocks & Solutions (Use Evergreen Pad)' : selectedAddressType?.id === 2 ? 'Superlite AAC Blocks Industry (Use Superlite AAC Pad)' : selectedAddressType?.id === 3 ? 'Superlite Solutions (Use Superlite Solutions Pad)' : '',
                     client_id: selectedClient?.id || '',
                     address_type: selectedAddressType || '',
                     payment_mode: selectedPaymentType?.id || '',
                     credit_days: selectedPaymentType?.title === 'CREDIT' ? noOfCreditDays : null,
-                    breakage: selectedBreakage?.title || '',
+                    breakage: selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : selectedAddressType?.id === 3 ? 'N/A' : '',
                     is_unloading: selectedUnloading?.id || '',
                     detention_charge: detentionCharge ? detentionCharge.toString() : '',
                     validity: quotationValidity ? quotationValidity.toString() : '',
@@ -465,7 +461,7 @@ const AddQuotation = ({ navigation }) => {
                             <SelectDropdown
                                 data={company}
                                 onSelect={(selectedItem, index) => {
-                                    // console.log('selected company: ', selectedItem, index);
+                                    console.log('selected company: ', selectedItem);
                                     setSelectedCompany(selectedItem);
                                 }}
                                 renderButton={(selectedItem, isOpened) => {
@@ -491,14 +487,19 @@ const AddQuotation = ({ navigation }) => {
                         </View>
 
                         {/* Select Pad */}
-                        <View style={{ flexDirection: 'column', justifyContent: 'center', marginTop: 12, backgroundColor: '#fff', padding: 13, elevation: 3, borderRadius: 12 }}>
-                            {/* Heading */}
-                            <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 7 }}>
-                                <Ionicons name="layers-outline" size={16} color="#000" />
-                                <Text style={{ color: '#000', fontSize: responsiveFontSize(2), fontWeight: '500' }}>Select Pad Type</Text>
-                            </View>
+                        {selectedCompany != null && (
+                            <View style={{ flexDirection: 'column', justifyContent: 'center', marginTop: 12, backgroundColor: '#fff', padding: 13, elevation: 3, borderRadius: 12 }}>
+                                {/* Heading */}
+                                <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 7 }}>
+                                    <Ionicons name="layers-outline" size={16} color="#000" />
+                                    <Text style={{ color: '#000', fontSize: responsiveFontSize(2), fontWeight: '500' }}>Pad Type</Text>
+                                </View>
 
-                            <SelectDropdown
+                                <View style={{ backgroundColor: '#f0f8ec', borderColor: green, borderWidth: 1, borderRadius: 10, paddingVertical: 8, paddingLeft: 10 }}>
+                                    <Text style={{ color: '#000', fontWeight: '500' }}>{selectedCompany?.id === 1 ? 'Evergreen Blocks & Solutions (Use Evergreen Pad)' : selectedCompany?.id === 2 ? 'Superlite AAC Blocks Industry (Use Superlite AAC Pad)' : selectedCompany?.id === 3 ? 'Superlite Solutions (Use Superlite Solutions Pad)' : ''}</Text>
+                                </View>
+
+                                {/* <SelectDropdown
                                 data={pads}
                                 onSelect={(selectedItem, index) => {
                                     // console.log('selected company: ', selectedItem, index);
@@ -523,8 +524,9 @@ const AddQuotation = ({ navigation }) => {
                                 }}
                                 showsVerticalScrollIndicator={false}
                                 dropdownStyle={styles.dropdownMenuStyle}
-                            />
-                        </View>
+                            /> */}
+                            </View>
+                        )}
 
                         {/* Select Client */}
                         <View style={{ flexDirection: 'column', justifyContent: 'center', marginTop: 12, backgroundColor: '#fff', padding: 13, elevation: 3, borderRadius: 12 }}>
@@ -575,6 +577,7 @@ const AddQuotation = ({ navigation }) => {
                                 onSelect={(selectedItem, index) => {
                                     // console.log('selected company: ', selectedItem, index);
                                     setselectedAddressType(selectedItem);
+                                    setSelectedBreakage(selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : selectedAddressType?.id === 3 ? 'N/A' : '' || '');
                                 }}
                                 renderButton={(selectedItem, isOpened) => {
                                     return (
@@ -666,19 +669,19 @@ const AddQuotation = ({ navigation }) => {
                         )}
 
                         {/* Select Breakage  */}
-                        <View style={{ flexDirection: 'column', justifyContent: 'center', marginTop: 12, backgroundColor: '#fff', padding: 13, elevation: 3, borderRadius: 12 }}>
-                            {/* Heading */}
-                            <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                                <Ionicons name="pie-chart-outline" size={16} color="#000" />
-                                <Text style={{ color: '#000', fontSize: responsiveFontSize(2), fontWeight: '500' }}>Select Breakage (in %)</Text>
-                            </View>
+                        {selectedAddressType != null && (
+                            <View style={{ flexDirection: 'column', justifyContent: 'center', marginTop: 12, backgroundColor: '#fff', padding: 13, elevation: 3, borderRadius: 12 }}>
+                                {/* Heading */}
+                                <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                                    <Ionicons name="pie-chart-outline" size={16} color="#000" />
+                                    <Text style={{ color: '#000', fontSize: responsiveFontSize(2), fontWeight: '500' }}>Breakage (in %)</Text>
+                                </View>
 
-                            <View style={{ backgroundColor: '#f0f8ec', borderColor: green, borderWidth: 1, borderRadius: 10, paddingVertical: 8, paddingLeft: 10 }}>
-                                {/* <Text style={{ color: '#000', fontWeight: '600' }}>{selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : 'N/A'}</Text> */}
-                                <Text ref={breakageRef} style={{ color: '#000', fontWeight: '600' }}>{breakageValue}</Text>
-                            </View>
+                                <View style={{ backgroundColor: '#f0f8ec', borderColor: green, borderWidth: 1, borderRadius: 10, paddingVertical: 8, paddingLeft: 10 }}>
+                                    <Text style={{ color: '#000', fontWeight: '500' }}>{selectedAddressType?.id === 1 ? '2%' : selectedAddressType?.id === 2 ? '3%' : selectedAddressType?.id === 3 ? 'N/A' : ''}</Text>
+                                </View>
 
-                            {/* <SelectDropdown
+                                {/* <SelectDropdown
                                 data={breakage}
                                 onSelect={(selectedItem, index) => {
                                     // console.log('selected company: ', selectedItem, index);
@@ -704,7 +707,8 @@ const AddQuotation = ({ navigation }) => {
                                 showsVerticalScrollIndicator={false}
                                 dropdownStyle={styles.dropdownMenuStyle}
                             /> */}
-                        </View>
+                            </View>
+                        )}
 
                         {/* Need for Unloading */}
                         <View style={{ flexDirection: 'column', justifyContent: 'center', marginTop: 12, backgroundColor: '#fff', padding: 13, elevation: 3, borderRadius: 12 }}>
@@ -885,7 +889,7 @@ const AddQuotation = ({ navigation }) => {
                                                             Size Type: {product.sizeType || 'N/A'}
                                                         </Text>
                                                         <Text style={{ color: '#000', fontSize: responsiveFontSize(1.8), marginTop: 2 }}>
-                                                            Bag Size: {product.bagSize || 'N/A'}
+                                                            Bag Size: 26
                                                         </Text>
                                                         <Text style={{ color: '#000', fontSize: responsiveFontSize(1.8), marginTop: 2 }}>
                                                             Rate Per Bag: {product.ratePerBag || 'N/A'}
@@ -928,7 +932,7 @@ const AddQuotation = ({ navigation }) => {
                                 {/* Checkboxes */}
                                 <View style={{ flexDirection: 'column' }}>
                                     {/* Option 1 */}
-                                    {(selectedPad?.id === 1 || selectedPad?.id === 2) && (
+                                    {(selectedCompany?.id === 1 || selectedCompany?.id === 2) && (
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <CheckBox
                                                 value={selectedOption === 1} // Checked if selectedOption is 1
@@ -952,7 +956,7 @@ const AddQuotation = ({ navigation }) => {
                                     )}
 
                                     {/* Option 2 */}
-                                    {(selectedPad?.id === 1 || selectedPad?.id === 3) && (
+                                    {(selectedCompany?.id === 1 || selectedCompany?.id === 3) && (
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <CheckBox
                                                 value={selectedOption === 2} // Checked if selectedOption is 2
